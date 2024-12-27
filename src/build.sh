@@ -4,7 +4,6 @@ set -e # stop on error
 # files to compile
 CODE_FILES=(
     "main.cpp"
-    "Tester.cpp"
 )
 
 OBJECTS_PATH=()
@@ -55,6 +54,7 @@ then
     
     sleep 0.5
     g++ ${OBJECTS_PATH[@]} -O3 -lsfml-graphics -lsfml-window -lsfml-system -o "release/$OUTFILE" 
+    echo Compiled into release/$OUTFILE
     
 else
     echo Building on Debug mode
@@ -66,6 +66,5 @@ else
     
     sleep 0.5
     g++ ${OBJECTS_PATH[@]} -lsfml-graphics -lsfml-window -lsfml-system -o "debug/$OUTFILE" 
+    echo Compiled into debug/$OUTFILE
 fi
-
-echo Compiled into sfml-app.out
