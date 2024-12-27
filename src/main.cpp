@@ -3,15 +3,16 @@
 #include <SFML/Graphics.hpp>
 #include "CurrentMode.hpp"
 
-#define GET_TIME std::chrono::steady_clock::now()
+#define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()).time_since_epoch()
 
 int main()
 {
     
-    sf::RenderWindow window(sf::VideoMode({200, 200}), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({640, 480}), "SFML works!");
     sf::CircleShape shape(100.0f);
     shape.setFillColor(sf::Color::Green);
     
+    window.setPosition({0,0});
 
     while (window.isOpen())
     {
@@ -19,6 +20,10 @@ int main()
         while(window.pollEvent(event)) // getting the current event
         {
             // getting the Current event
+        #ifdef DEBUG
+            auto event_start_pt = GET_TIME;
+        #endif
+
             switch (event.type)
             {
                 case sf::Event::Closed:
@@ -35,6 +40,10 @@ int main()
                 default:
                     break;
             }
+
+        #ifdef DEBUG
+            std::cout << "[(main.cpp) DEBUG] Event Calculation time: " << GET_TIME.count() - event_start_pt.count() << "ms" << std::endl;
+        #endif
                 
 
         }
