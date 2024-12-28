@@ -26,15 +26,21 @@ int main()
     icon_sprite.setTexture(icon_texture);
     icon_sprite.scale(4.0f, 4.0f);
     SFMLBoost::CenterASprite(&icon_sprite, &window);
-
+    
 
     // icon_sprite.setOrigin({icon_texture.getSize().x / 2.0f, icon_texture.getSize().y / 2.0f});
     // icon_sprite.setPosition(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
     //shape.setFillColor(sf::Color::Green);
     
+#ifdef DEBUG
+    auto last_epoch = GET_TIME;
+    unsigned int frame_counter = 0;
+#endif
 
     while (window.isOpen())
     {
+        
+
         sf::Event event;                // event varibale
         while (window.pollEvent(event)) // getting the current event
         {
@@ -51,9 +57,21 @@ int main()
         }
 
         // rendering the window
+
         window.clear();
+        window.clear(sf::Color(29, 180, 237));
         window.draw(icon_sprite);
         //window.draw(shape);
         window.display();
+
+    #ifdef DEBUG
+        frame_counter++;
+        if (GET_TIME.count() - last_epoch.count() >= 1000 )
+        {
+            last_epoch = GET_TIME;
+            std::cout << "FPS: " << frame_counter << std::endl;
+            frame_counter = 0;
+        }
+    #endif
     }
 }

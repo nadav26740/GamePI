@@ -58,6 +58,8 @@ then
     AssembleAllFiles ${RELEASE_BIN_FOLDER}
     
     sleep 0.5
+    
+    # compiling to bin file
     g++ ${OBJECTS_PATH[@]} -O3 -lsfml-graphics -lsfml-window -lsfml-system -o "${RELEASE_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${RELEASE_BIN_FOLDER}/$OUTFILE
     
@@ -70,6 +72,8 @@ else
     AssembleAllFiles ${DEBUG_BIN_FOLDER}
     
     sleep 0.5
+
+    # compiling to bin file
     g++ ${OBJECTS_PATH[@]} -lsfml-graphics -lsfml-window -lsfml-system -o "${DEBUG_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${DEBUG_BIN_FOLDER}/$OUTFILE
 fi

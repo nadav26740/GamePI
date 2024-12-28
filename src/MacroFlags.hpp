@@ -1,1 +1,1 @@
-#define RELEASE
+#define DEBUG
