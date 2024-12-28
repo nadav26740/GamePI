@@ -1,12 +1,13 @@
 #include <iostream>
 #include <chrono>
 #include <SFML/Graphics.hpp>
+#include <thread>
 #include "MacroFlags.hpp"
 #include "libs/BoostSFML.hpp"
 
 #define ICON_PATH "../assets/GamePIicon.png"
 
-#define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()).time_since_epoch()
+#define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now())
 
 int main()
 {
@@ -37,10 +38,13 @@ int main()
     unsigned int frame_counter = 0;
 #endif
 
-    while (window.isOpen())
-    {
-        
+    std::chrono::steady_clock::time_point next_frame;
+    std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / 60);
 
+
+    while (window.isOpen())
+    {   
+        next_frame = std::chrono::steady_clock::now() + interval;
         sf::Event event;                // event varibale
         while (window.pollEvent(event)) // getting the current event
         {
@@ -66,12 +70,14 @@ int main()
 
     #ifdef DEBUG
         frame_counter++;
-        if (GET_TIME.count() - last_epoch.count() >= 1000 )
+        if (GET_TIME.time_since_epoch().count() - last_epoch.time_since_epoch().count() >= 1000 )
         {
             last_epoch = GET_TIME;
-            std::cout << "FPS: " << frame_counter << std::endl;
+            std::cout << "[DEBUG (Main)]FPS: " << frame_counter << std::endl;
             frame_counter = 0;
         }
     #endif
+
+        std::this_thread::sleep_until(next_frame);
     }
 }
