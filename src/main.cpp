@@ -5,6 +5,8 @@
 #include "MacroFlags.hpp"
 #include "libs/BoostSFML.hpp"
 
+#define FRAME_LIMIT 59
+
 #define ICON_PATH "../assets/GamePIicon.png"
 
 #define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now())
@@ -39,7 +41,7 @@ int main()
 #endif
 
     std::chrono::steady_clock::time_point next_frame;
-    std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / 60);
+    std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / FRAME_LIMIT);
 
 
     while (window.isOpen())
