@@ -13,7 +13,6 @@
 
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode({640, 480}), "Gameboy!");
     sf::Texture icon_texture;
     sf::Sprite icon_sprite;
