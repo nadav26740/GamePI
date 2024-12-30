@@ -3,7 +3,7 @@ set -e # stop on error
 
 # files to compile
 CODE_FILES=(
-    "main.cpp"
+    "Demo_main.cpp"
     "libs/SFMLBoost/BoostSFML.cpp"
     "libs/SFMLBoost/ObjectsGroup.cpp"
 )
