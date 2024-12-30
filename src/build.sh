@@ -4,7 +4,8 @@ set -e # stop on error
 # files to compile
 CODE_FILES=(
     "main.cpp"
-    "libs/BoostSFML.cpp"
+    "libs/SFMLBoost/BoostSFML.cpp"
+    "libs/SFMLBoost/ObjectsGroup.cpp"
 )
 
 OBJECTS_PATH=()
@@ -26,7 +27,7 @@ AssembleAllFiles()
     for code_file in ${CODE_FILES[@]}
     do
         echo Assembling $code_file
-        g++ -std=c++17 -c $code_file -o ${folder_location}/${code_file//"/"/"."}.obj
+        g++ -std=c++17 -c $code_file -o ${folder_location}/${code_file//"/"/"."}.obj -I.
         OBJECTS_PATH+=(${folder_location}/${code_file//"/"/"."}.obj) # saving the asmbled files
     done
     echo Object Files Created: ${OBJECTS_PATH[@]}

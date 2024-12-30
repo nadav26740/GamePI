@@ -1,6 +1,8 @@
+#pragma once
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../MacroFlags.hpp"
+#include "MacroFlags.hpp"
 
 #ifdef DEBUG
     #define BOOSTSFML_HPP_DEBUG
