@@ -49,7 +49,7 @@ Integrity_check()
 
 Integrity_check
 
-if [ "$*" == "--release" ]
+if [[ "$*" == *"--release"* ]]
 then
     echo buliding on Release Mode
     echo "#define RELEASE" > $COMPILING_MODE_HEADER
@@ -63,6 +63,8 @@ then
     # compiling to bin file
     g++ ${OBJECTS_PATH[@]} -O3 -lsfml-graphics -lsfml-window -lsfml-system -o "${RELEASE_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${RELEASE_BIN_FOLDER}/$OUTFILE
+    Output_path=${RELEASE_BIN_FOLDER}/$OUTFILE
+
     
 else
     echo Building on Debug mode
@@ -77,4 +79,10 @@ else
     # compiling to bin file
     g++ ${OBJECTS_PATH[@]} -lsfml-graphics -lsfml-window -lsfml-system -o "${DEBUG_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${DEBUG_BIN_FOLDER}/$OUTFILE
+    Output_path=${DEBUG_BIN_FOLDER}/$OUTFILE
+fi
+
+if [[ "$*" == *"run"* ]]
+then
+    ./${Output_path}
 fi
