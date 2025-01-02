@@ -53,6 +53,15 @@ namespace SFMLBoost
 
     void ObjectsGroup::DrawGroup(sf::RenderWindow& window)
     {
+        // if an object has been added
+        // TODO:
+        if (last_draw_group_count != this->Objects_in_group.size())
+        {
+            
+        }
+
+        this->last_draw_group_count = this->Objects_in_group.size();
+
         std::vector<std::shared_ptr<Object_wrapper>> objects_to_draw(this->Objects_in_group);
         std::sort(objects_to_draw.begin(), objects_to_draw.end(), this->Compare_shared_ptr_object_z);
         

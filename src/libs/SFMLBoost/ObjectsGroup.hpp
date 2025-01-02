@@ -12,8 +12,9 @@ namespace SFMLBoost
     
     class Object_wrapper
    {
-    private:
+    protected:
         const sf::Drawable* object_drawable;
+        std::shared_ptr<sf::Transformable> object_ptr;
 
     public:
 
@@ -30,17 +31,19 @@ namespace SFMLBoost
         /* data */
         /// shared ptr to the object 
         /// The position of the object_ptr is meaningless  
-        std::shared_ptr<sf::Transformable> object_ptr;
          
         /// @brief Getting a window to draw on and drawing the object on it
         /// @param Window to draw on
         void Draw(sf::RenderWindow&);
         
         // the position is relative to the origin of the Group
+        
         sf::Vector2f position;
 
         // the z position is relative to the objects in the group only
         int z_position;
+
+        friend class ObjectsGroup;
     };
 
     // todo:
@@ -52,6 +55,8 @@ namespace SFMLBoost
         sf::Vector2f OriginPosition;
         sf::Vector2f Position; 
         static bool Compare_shared_ptr_object_z(std::shared_ptr<Object_wrapper> obj_ptr1, std::shared_ptr<Object_wrapper> obj_ptr2 );
+
+        int last_draw_group_count;
 
     public:
 
