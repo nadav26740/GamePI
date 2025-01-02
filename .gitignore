@@ -33,6 +33,7 @@
 
 # VSCODE
 .vscode/
+.editorconfig
 
 # build
 debug/
