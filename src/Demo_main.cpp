@@ -69,6 +69,28 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
+            
+            case sf::Event::KeyPressed:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Right:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({1, 0}));
+                    break;
+                
+                case sf::Keyboard::Left:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({-1, 0}));
+                    break;
+                
+                case sf::Keyboard::Down:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({0, 1}));
+                    break;
+                
+                case sf::Keyboard::Up:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({0, -1}));
+                    break;
+                        
+                }
+                break;
 
             default:
                 break;

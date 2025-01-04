@@ -55,10 +55,13 @@ namespace SFMLBoost
     {
         // if an object has been added
         // TODO:
-        if (last_draw_group_count != this->Objects_in_group.size())
-        {
+        // if (last_draw_group_count != this->Objects_in_group.size())
+        // {
             
-        }
+        // }
+        // todo update the Objects only on change and not everytime
+
+        
 
         this->last_draw_group_count = this->Objects_in_group.size();
 
@@ -67,6 +70,10 @@ namespace SFMLBoost
         
         for (auto itr = objects_to_draw.begin(); itr != objects_to_draw.end(); itr++)
         {
+            sf::Vector2f temp_pose = itr->get()->position;
+            temp_pose += this->Position + this->OriginPosition;
+            itr->get()->object_ptr->setPosition(temp_pose);
+
             itr->get()->Draw(window);
         }
     }
