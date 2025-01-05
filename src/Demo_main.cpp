@@ -25,17 +25,28 @@ int main()
         exit(EXIT_FAILURE);
     }
 
+    // ! testing nomral sprite
     icon_texture.setSmooth(false);
     
     icon_sprite.setTexture(icon_texture);
     icon_sprite.scale(4.0f, 4.0f);
     SFMLBoost::CenterASprite(&icon_sprite, &window);
 
-    // !TEST
+    // !TESTING THE OBJECT WRAPPER
     std::shared_ptr shared_sprite_tester = std::make_shared<sf::Sprite>();
     shared_sprite_tester->setTexture(icon_texture);
-    SFMLBoost::Object_wrapper *test_subject = new SFMLBoost::Object_wrapper(shared_sprite_tester, shared_sprite_tester.get());
-    
+    std::shared_ptr test_subject = std::make_shared<SFMLBoost::Object_wrapper>(shared_sprite_tester, shared_sprite_tester.get());
+
+    std::shared_ptr circle_sprite = std::make_shared<sf::CircleShape>();
+    circle_sprite->setRadius(5.0f);
+    circle_sprite->setFillColor(sf::Color::Green);
+    std::shared_ptr circle_wrapped = std::make_shared<SFMLBoost::Object_wrapper>(circle_sprite, circle_sprite.get());
+    circle_wrapped->z_position = -1;
+
+    // ! testing object grouper
+    SFMLBoost::ObjectsGroup objects_group;
+    objects_group.Objects_in_group.push_back(circle_wrapped);
+    objects_group.Objects_in_group.push_back(test_subject);
 
 #ifdef DEBUG
     auto last_epoch = GET_TIME;
@@ -58,6 +69,28 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
+            
+            case sf::Event::KeyPressed:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Right:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({1, 0}));
+                    break;
+                
+                case sf::Keyboard::Left:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({-1, 0}));
+                    break;
+                
+                case sf::Keyboard::Down:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({0, 1}));
+                    break;
+                
+                case sf::Keyboard::Up:
+                    objects_group.SetPosition(objects_group.GetPosition() + sf::Vector2f({0, -1}));
+                    break;
+                        
+                }
+                break;
 
             default:
                 break;
@@ -69,7 +102,8 @@ int main()
         window.clear();
         window.clear(sf::Color(29, 180, 237));
         window.draw(icon_sprite);
-        test_subject->Draw(window);
+        objects_group.DrawGroup(window);
+
         // window.draw(shape);
         window.display();
 
