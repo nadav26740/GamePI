@@ -7,6 +7,10 @@ namespace SFMLBoost
         this->object_ptr = object_ptr;
         this->object_drawable = Object_draw;
         z_position = 0;
+
+        #ifdef DEBUG
+        std::cout << "New Object wrapped Memory addresses [transform, draw]: [" << object_ptr.get() << ", " << object_drawable << "]" << std::endl;
+        #endif
     }
 
     Object_wrapper::Object_wrapper()
