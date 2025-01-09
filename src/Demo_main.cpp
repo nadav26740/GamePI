@@ -1,8 +1,9 @@
 #include <iostream>
 #include <chrono>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <thread>
-
+#include <filesystem>
 #include "MacroFlags.hpp"
 #include "libs/SFMLBoost/BoostSFML.hpp"
 #include "libs/SFMLBoost/ObjectsGroup.hpp"
@@ -10,18 +11,29 @@
 #define FRAME_LIMIT 59
 
 #define ICON_PATH "../assets/GamePIicon.png"
+#define FONT_PATH "../assets/GameFont.ttf"
 
 #define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now())
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({640, 480}), "Gameboy!");
+    sf::RenderWindow window(sf::VideoMode({640, 480}), "Gameboy!", sf::Style::Fullscreen);
     sf::Texture icon_texture;
     sf::Sprite icon_sprite;
+    sf::Font Main_Font;
+    sf::Vector2f temp;
+    
 
+    sf::Text Logo_text("My Game PI", Main_Font);
+    
     if (!icon_texture.loadFromFile(ICON_PATH))
     {
         std::cerr << "Failed to load icon Texture" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if (!Main_Font.loadFromFile(FONT_PATH))
+    {
+        std::cerr << "Failed to load font " << FONT_PATH << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -31,6 +43,13 @@ int main()
     icon_sprite.setTexture(icon_texture);
     icon_sprite.scale(4.0f, 4.0f);
     SFMLBoost::CenterASprite(&icon_sprite, &window);
+
+    Logo_text.setCharacterSize(35);
+
+    SFMLBoost::CenterATransformable(&Logo_text, &window, Logo_text.getLocalBounds());
+    temp = Logo_text.getPosition();
+    temp.y += icon_sprite.getGlobalBounds().height / 2 + 20;
+    Logo_text.setPosition(temp);
 
     // !TESTING THE OBJECT WRAPPER
     std::shared_ptr shared_sprite_tester = std::make_shared<sf::Sprite>();
@@ -102,6 +121,7 @@ int main()
         window.clear();
         window.clear(sf::Color(29, 180, 237));
         window.draw(icon_sprite);
+        window.draw(Logo_text);
         objects_group.DrawGroup(window);
 
         // window.draw(shape);
@@ -119,4 +139,6 @@ int main()
 
         std::this_thread::sleep_until(next_frame);
     }
+
+    return EXIT_SUCCESS;
 }

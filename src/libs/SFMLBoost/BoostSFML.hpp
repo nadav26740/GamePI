@@ -16,4 +16,5 @@ namespace SFMLBoost
     /// @param SpriteToCenter Sprite to center
     /// @param Window_Referance Current window referance (The sprite will be center by this window size)
     void CenterASprite(sf::Sprite *SpriteToCenter, sf::Window* Window_Referance);
+    void CenterATransformable(sf::Transformable *TransformableToCenter, sf::Window* window_referance, sf::FloatRect object_bounds = sf::FloatRect(), sf::Vector2f object_origin = {0,0});
 }
