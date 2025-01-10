@@ -4,8 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <queue>
-#include "MacroFlags.hpp"
 #include <vector>
+
+#include "MacroFlags.hpp"
 
 namespace SFMLBoost
 {
@@ -37,7 +38,6 @@ namespace SFMLBoost
         void Draw(sf::RenderWindow&);
         
         // the position is relative to the origin of the Group
-        
         sf::Vector2f position;
 
         // the z position is relative to the objects in the group only
