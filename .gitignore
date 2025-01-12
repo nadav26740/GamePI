@@ -38,3 +38,6 @@
 # build
 debug/
 release/
+
+# Identifier of wsl  
+.Identifier
