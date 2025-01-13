@@ -6,6 +6,14 @@ CODE_FILES=(
     "Demo_main.cpp"
     "libs/SFMLBoost/BoostSFML.cpp"
     "libs/SFMLBoost/ObjectsGroup.cpp"
+    "Core/AssetsCache.cpp"
+)
+
+SFML_FLAGS=(
+    "-lsfml-audio"
+    "-lsfml-graphics"
+    "-lsfml-window"
+    "-lsfml-system"
 )
 
 OBJECTS_PATH=()
@@ -61,7 +69,7 @@ then
     sleep 0.5
     
     # compiling to bin file
-    g++ ${OBJECTS_PATH[@]} -O3 -lsfml-graphics -lsfml-window -lsfml-system -o "${RELEASE_BIN_FOLDER}/$OUTFILE" 
+    g++ ${OBJECTS_PATH[@]} -std=c++17 -O3 ${SFML_FLAGS[@]} -o "${RELEASE_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${RELEASE_BIN_FOLDER}/$OUTFILE
     Output_path=${RELEASE_BIN_FOLDER}/$OUTFILE
 
@@ -77,7 +85,7 @@ else
     sleep 0.5
 
     # compiling to bin file
-    g++ ${OBJECTS_PATH[@]} -lsfml-graphics -lsfml-window -lsfml-system -o "${DEBUG_BIN_FOLDER}/$OUTFILE" 
+    g++ ${OBJECTS_PATH[@]} -std=c++17 ${SFML_FLAGS[@]} -o "${DEBUG_BIN_FOLDER}/$OUTFILE" 
     echo Compiled into ${DEBUG_BIN_FOLDER}/$OUTFILE
     Output_path=${DEBUG_BIN_FOLDER}/$OUTFILE
 fi
