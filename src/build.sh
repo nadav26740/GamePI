@@ -9,6 +9,7 @@ CODE_FILES=(
     "Core/AssetsCache.cpp"
 )
 
+# To link an SFML library, you must add "-lsfml-xxx"
 SFML_FLAGS=(
     "-lsfml-audio"
     "-lsfml-graphics"
