@@ -4,9 +4,13 @@
 #include <SFML/Audio.hpp>
 #include <thread>
 #include <filesystem>
+
 #include "MacroFlags.hpp"
+
 #include "libs/SFMLBoost/BoostSFML.hpp"
 #include "libs/SFMLBoost/ObjectsGroup.hpp"
+
+#include "Core/AssetsCache.hpp"
 
 #define FRAME_LIMIT 59
 
@@ -36,6 +40,8 @@ int main()
         std::cerr << "Failed to load font " << FONT_PATH << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    AssetsCache::GetIntance();
 
     // ! testing nomral sprite
     icon_texture.setSmooth(false);
