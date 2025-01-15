@@ -10,7 +10,7 @@
 #include "libs/SFMLBoost/BoostSFML.hpp"
 #include "libs/SFMLBoost/ObjectsGroup.hpp"
 
-#include "Core/AssetsCache.hpp"
+#include "Core/AssetsCacheManager.hpp"
 
 #define FRAME_LIMIT 59
 
@@ -41,7 +41,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    AssetsCache::GetIntance();
+    AssetsCacheManager::GetIntance();
 
     // ! testing nomral sprite
     icon_texture.setSmooth(false);
