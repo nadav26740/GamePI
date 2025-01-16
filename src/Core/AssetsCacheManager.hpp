@@ -1,12 +1,14 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include <string>
+#include <string_view>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <string>
-#include <map>
 
 #include "libs/nlohmann/json.hpp"
+
 #define CONFIG_FILE_NAME "assets.conf"
 #define CONFIG_FOLDER_NAME "Assets"
 
@@ -15,7 +17,7 @@
 // TODO: Add a default texture and sound in case missing asset
 
 namespace SOUND_NAMES {
-    const std::string_view BEEP = "beep_sound";
+    constexpr std::string_view BEEP = "beep_sound";
 }
 
 /// class to make sure that assets won't be needed to load twice
@@ -30,13 +32,17 @@ private:
     AssetsCacheManager(AssetsCacheManager const&) = delete;       // Don't Implement
     void operator=(AssetsCacheManager const&) = delete;    // Don't implement
 
-public:
-    //sf::SoundBuffer* LoadSoundBuffer(std::string name);
-    
-    /// @brief 
+public:    
+    /// @brief Too allow singleton we used this function to create single static object of this class
     /// @return the Intance of the current AssetsCache
     static AssetsCacheManager* GetIntance();
-    // TODO: Load Assets From jsonfile (Like texture pack [Theme])
-    //* void LoadFromJson(std::string path = DEFAULT_ASSETS_JSON_PATH)
 
+    // TODO: Load Assets From jsonfile (Like texture pack [Theme])
+    void LoadFromJson(const std::string& path /* = DEFAULT_ASSETS_JSON_PATH */);
+    
+    // TODO: Get Soundbuffer pointer from the assets cache
+    const sf::SoundBuffer* GetSoundBuffer(const std::string &name);
+    
+    // TODO: Get Texture pointer from the assets cache
+    const sf::Texture* GetTexture(const std::string &name);
 };
