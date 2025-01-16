@@ -21,14 +21,16 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({640, 480}), "Gameboy!", sf::Style::Fullscreen);
+    std::cout << "================== RUNNING DEMO MAIN ==================" << std::endl;
+    
+    sf::RenderWindow window(sf::VideoMode({640, 480}), "Demo GamePI!", sf::Style::Fullscreen);
     sf::Texture icon_texture;
     sf::Sprite icon_sprite;
     sf::Font Main_Font;
     sf::Vector2f temp;
     
 
-    sf::Text Logo_text("My Game PI", Main_Font);
+    sf::Text Logo_text("Demo Game PI", Main_Font);
     
     if (!icon_texture.loadFromFile(ICON_PATH))
     {
