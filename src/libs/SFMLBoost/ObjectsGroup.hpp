@@ -60,32 +60,27 @@ namespace SFMLBoost
 
     public:
 
-        //TODO
         std::vector<std::shared_ptr<SFMLBoost::Object_wrapper>> Objects_in_group;
 
         // gets:
 
-        // TODO:
         /// @brief returning the Position of the group
         sf::Vector2f GetPosition();
 
-        // TODO:
         /// @brief returning the origin of the group
         sf::Vector2f GetOrigin();
         
         // sets:
 
-        // TODO:
         /// @brief sets the position based on the window position
         /// @param the position of the group to the window 
         void SetPosition(sf::Vector2f);
         
-        // TODO:
         /// @brief sets the origin position of the group
         /// @param The New origin
         void SetOrigin(sf::Vector2f);
 
-        // TODO:
+        // TODO: Optimizations
         /// @brief Drawing the group elements into the window
         /// @param The Window to draw on 
         void DrawGroup(sf::RenderWindow&);
