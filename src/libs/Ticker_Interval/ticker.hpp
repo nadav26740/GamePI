@@ -9,7 +9,10 @@
 #include <mutex>
 #include <chrono>
 
-// if u want to change the time scale change it here!
+
+/// @note if u want to change the time scale change it here!
+/// @brief the current timestamp we use
+/// @attention Current timestamp ratio milliseconds
 #define DEFAULT_TIME_TYPE_TICKER std::chrono::milliseconds
 
 namespace Resta
