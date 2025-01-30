@@ -10,12 +10,22 @@ CODE_FILES=(
 )
 
 # To link an SFML library, you must add "-lsfml-{lib}"
-SFML_FLAGS=(
+# l stands for linux
+DYNAMIC_SFML_FLAGS=(
     "-lsfml-audio"
     "-lsfml-graphics"
     "-lsfml-window"
     "-lsfml-system"
 )
+
+STATIC_SFML_FLAGS=(
+    "-lsfml-audio-s"
+    "-lsfml-graphics-s"
+    "-lsfml-window-s"
+    "-lsfml-system-s"
+)
+
+
 
 OBJECTS_PATH=()
 
@@ -57,6 +67,17 @@ Integrity_check()
 }
 
 Integrity_check
+
+if [[ "$*" == *"--static-sfml"* ]]
+then
+    echo "Loading static SFML flags"
+    #echo "Currently Static libs not working ;d"
+    #exit
+    SFML_FLAGS=${STATIC_SFML_FLAGS[@]}
+else
+    echo "Loading Dynamic SFML flags"
+    SFML_FLAGS=${DYNAMIC_SFML_FLAGS[@]}
+fi
 
 if [[ "$*" == *"--release"* ]]
 then
