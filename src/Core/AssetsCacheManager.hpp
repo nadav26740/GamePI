@@ -20,6 +20,19 @@ namespace SOUND_NAMES {
     constexpr std::string_view BEEP = "beep_sound";
 }
 
+/// @brief Struct to present the current status of the AssetsCacheManager
+struct AssetsCacheStatus {
+    unsigned int textures_loaded;
+    unsigned int Sounds_loaded;
+
+    std::vector<std::string> Loaded_assets;
+    std::vector<std::string> Failed_To_Load;
+
+    std::vector<std::string> json_loaded;
+
+    // inline std::ostream& operator<<(std::ostream& os, const AssetsCacheManager& cache);
+};
+
 /// class to make sure that assets won't be needed to load twice
 /// Will platform as Assets memory manager
 /// Singleton
@@ -58,14 +71,24 @@ public:
     /// @return the Intance of the current AssetsCache
     static AssetsCacheManager* GetIntance();
 
-    // TODO: Load Assets From jsonfile (Like texture pack [Theme])
+    /// @todo Load Assets From jsonfile (Like texture pack [Theme]) 
+    /// @brief Loading Assets as writen on Json
+    /// @attention Assets of the same type with similer names will overwrite the loaded 
+    /// @param path Json presenting data on theme location
     virtual void LoadFromJson(const std::string& path /* = DEFAULT_ASSETS_JSON_PATH */);
     
-    // TODO: Get Soundbuffer pointer from the assets cache
+    /// @todo Get Soundbuffer pointer from the assets cache
+    /// @brief Getting SoundBuffer from the mapped assets
+    /// @param name of the soundbuffer to get
+    /// @return Soundbuffer or nullptr if soundbuffer not found
     virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name);
     
-    // TODO: Get Texture pointer from the assets cache
+    /// @todo Get Texture pointer from the assets cache
+    /// @brief Getting Texture from the mapped assets
+    /// @param name of the Texture to get
+    /// @return Texture or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name);
 
-    // TODO: Implement a status 
+    /// @todo Implement a status 
+    virtual AssetsCacheStatus GetStatus();
 };
