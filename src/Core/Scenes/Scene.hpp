@@ -16,14 +16,14 @@ protected:
 public:
     Scene();
 
-    /// @brief 
-    virtual void Awake() = 0;
-
-    /// @brief 
+    /// @brief Runs when scene loaded 
     virtual void Start() = 0;
 
-    /// @brief Update phase in the native system loop
+    /// @brief Runs every frame responsible for the logical part of the frame
     virtual void Frame_update() = 0;
+
+    /// @brief Runs every frame responsible for the render part of the frame
+    virtual void Graphical_update(sf::Window window_Handler) = 0;
 
     virtual ~Scene() = 0;
 };
