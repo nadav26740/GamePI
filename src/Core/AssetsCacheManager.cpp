@@ -31,5 +31,6 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
 AssetsCacheStatus AssetsCacheManager::GetStatus()
 {
     std::cout << "AssetsCacheManager::GetStatus [WIP]" << std::endl;
-    return AssetsCacheStatus();
+    AssetsCacheStatus status;
+    return status;
 }

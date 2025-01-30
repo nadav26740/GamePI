@@ -24,6 +24,7 @@ namespace SOUND_NAMES {
 struct AssetsCacheStatus {
     unsigned int textures_loaded;
     unsigned int Sounds_loaded;
+    unsigned int fonts_loaded;
 
     std::vector<std::string> Loaded_assets;
     std::vector<std::string> Failed_To_Load;
@@ -32,6 +33,7 @@ struct AssetsCacheStatus {
 
     // inline std::ostream& operator<<(std::ostream& os, const AssetsCacheManager& cache);
 };
+
 
 /// class to make sure that assets won't be needed to load twice
 /// Will platform as Assets memory manager
@@ -54,18 +56,6 @@ protected:
     std::vector<std::string> json_loaded;
 
 public:    
-    struct AssetsCacheStatus {
-        unsigned int textures_loaded;
-        unsigned int Sounds_loaded;
-        unsigned int fonts_loaded;
-
-        std::vector<std::string> Loaded_assets;
-        std::vector<std::string> Failed_To_Load;
-    
-        std::vector<std::string> json_loaded;
-
-        // inline std::ostream& operator<<(std::ostream& os, const AssetsCacheManager& cache);
-    };
 
     /// @brief Too allow singleton we used this function to create single static object of this class
     /// @return the Intance of the current AssetsCache
