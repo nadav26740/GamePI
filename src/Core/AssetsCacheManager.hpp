@@ -30,7 +30,7 @@ protected:
     std::map<std::string, sf::Texture> m_Texture_map;
 
     /// @brief Cache map of all the sounds loaded
-    std::map<std::string, sf::SoundBuffer> m_SoundBuffer_map;
+    std::map<std::filesystem::path, sf::SoundBuffer> m_SoundBuffer_map;
     AssetsCacheManager();
 
     // [Singleton] too make sure no one can create another object of this type
@@ -44,6 +44,7 @@ public:
     struct AssetsCacheStatus {
         unsigned int textures_loaded;
         unsigned int Sounds_loaded;
+        unsigned int fonts_loaded;
 
         std::vector<std::string> Loaded_assets;
         std::vector<std::string> Failed_To_Load;
