@@ -9,6 +9,8 @@
 
 #include "libs/nlohmann/json.hpp"
 
+#include "MacroFlags.hpp"
+
 #define CONFIG_FILE_NAME "assets.conf"
 #define CONFIG_FOLDER_NAME "Assets"
 
@@ -41,11 +43,36 @@ struct AssetsCacheStatus {
 class AssetsCacheManager
 {
 protected:
+    // # Textures
     /// @brief Cache map of all the textures loaded
-    std::map<std::string, sf::Texture> m_Texture_map;
+    std::map<std::filesystem::path, sf::Texture> m_Texture_map;
 
+    /// @brief Cache map referance to the Texture map
+    std::map<std::string, std::filesystem::path> m_Texture_keys_map;
+
+    std::unique_ptr<sf::Texture> Error_texture;
+
+    // # Sounds
     /// @brief Cache map of all the sounds loaded
     std::map<std::filesystem::path, sf::SoundBuffer> m_SoundBuffer_map;
+
+    /// @brief Cache map referance to the soundbuffer map
+    std::map<std::string, std::filesystem::path> m_SoundBuffer_keys_map;
+
+    /// @brief Error sound buffer if failed to load
+    std::unique_ptr<sf::SoundBuffer> Error_SoundBuffer;
+
+
+    // # Fonts
+    /// @brief Cache map of all the Fonts loaded
+    std::map<std::filesystem::path, sf::Font> m_Fonts_map;
+
+    /// @brief Cache map referance to the Fonts map
+    std::map<std::string, std::filesystem::path> m_Fonts_keys_map;
+
+    /// @brief Default font if failed to load
+    std::unique_ptr<sf::Font> Default_Font;
+
     AssetsCacheManager();
 
     // [Singleton] too make sure no one can create another object of this type
@@ -54,6 +81,8 @@ protected:
 
     std::vector<std::string> Failed_To_Load;
     std::vector<std::string> json_loaded;
+
+    void print_all_texturemap();
 
 public:    
 
@@ -78,6 +107,19 @@ public:
     /// @param name of the Texture to get
     /// @return Texture or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name);
+
+    /// @brief Getting name and path and loading texture to the cache with that name as key
+    /// @param name that will saved in the texture cache
+    /// @param path the path of the texture to load
+    /// @return True if successed to load the texture
+    virtual bool LoadTexture(const std::string& name, const std::filesystem::path& path);
+
+    /// @todo *!!!
+    /// @brief Getting name and path and loading Soundbuffer to the cache with that name as key
+    /// @param name the key name that will be saved in the soundbuffer cache
+    /// @param path of the soundbuffer
+    /// @return True if successed to load the soundbuffer
+    virtual void LoadSoundBuffer(const std::string& name, const std::filesystem::path& path);
 
     /// @todo Implement a status 
     virtual AssetsCacheStatus GetStatus();

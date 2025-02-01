@@ -27,7 +27,7 @@ private:
 
 public:
     Scene* GetCurrentScene();
-    void SetCurrentScene();
+    void SetCurrentScene(Scene* new_scene);
 
     /// @brief Too allow singleton we used this function to create single static object of this class
     /// @return the Intance of the current SceneManager

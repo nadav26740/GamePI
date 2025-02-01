@@ -32,6 +32,12 @@ int main()
 
     sf::Text Logo_text("Demo Game PI", Main_Font);
     
+    if (!AssetsCacheManager::GetIntance()->LoadTexture("Icon_sprite" , ICON_PATH))
+    {
+        std::cerr << "Failed to load icon Texture" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
     if (!icon_texture.loadFromFile(ICON_PATH))
     {
         std::cerr << "Failed to load icon Texture" << std::endl;
@@ -48,7 +54,7 @@ int main()
     // ! testing nomral sprite
     icon_texture.setSmooth(false);
     
-    icon_sprite.setTexture(icon_texture);
+    icon_sprite.setTexture(*(AssetsCacheManager::GetIntance()->GetTexture("Icon_sprite")));
     icon_sprite.scale(4.0f, 4.0f);
     SFMLBoost::CenterASprite(&icon_sprite, &window);
 
