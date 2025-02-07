@@ -6,7 +6,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "Scene.hpp"
-#include "SFMLBoost.hpp"
+#include "libs/Ticker_Interval/ticker.hpp"
+#include "libs/SFMLBoost.hpp"
 
 #define DEFAULT_RESOLUTION {600, 800}
 

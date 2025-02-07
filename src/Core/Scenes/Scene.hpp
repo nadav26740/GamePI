@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <SFML/Graphics.hpp>
-#include "SFMLBoost.hpp"
+#include "libs/SFMLBoost.hpp"
 
 // interface
 class Scene

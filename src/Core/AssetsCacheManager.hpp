@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+/// third party libs
+#include "libs/cpp-colors/colors.hpp"
 #include "libs/nlohmann/json.hpp"
 
 #include "MacroFlags.hpp"
@@ -50,7 +52,7 @@ protected:
     /// @brief Cache map referance to the Texture map
     std::map<std::string, std::filesystem::path> m_Texture_keys_map;
 
-    std::unique_ptr<sf::Texture> Error_texture;
+    sf::Texture *Error_texture;
 
     // # Sounds
     /// @brief Cache map of all the sounds loaded
@@ -60,7 +62,7 @@ protected:
     std::map<std::string, std::filesystem::path> m_SoundBuffer_keys_map;
 
     /// @brief Error sound buffer if failed to load
-    std::unique_ptr<sf::SoundBuffer> Error_SoundBuffer;
+    sf::SoundBuffer* Error_SoundBuffer;
 
 
     // # Fonts
@@ -71,7 +73,7 @@ protected:
     std::map<std::string, std::filesystem::path> m_Fonts_keys_map;
 
     /// @brief Default font if failed to load
-    std::unique_ptr<sf::Font> Default_Font;
+    sf::Font* Default_Font;
 
     AssetsCacheManager();
 
@@ -107,6 +109,12 @@ public:
     /// @param name of the Texture to get
     /// @return Texture or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name);
+
+
+    /// @brief 
+    /// @param name 
+    /// @return 
+    // virtual const sf::Font* GetFont(const std::string &name);
 
     /// @brief Getting name and path and loading texture to the cache with that name as key
     /// @param name that will saved in the texture cache
