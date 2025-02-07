@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <thread>
 #include <memory>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -6,19 +8,17 @@
 #include "Scene.hpp"
 #include "SFMLBoost.hpp"
 
-enum STATIC_SCENES_DEFINES
-{
-    SPLASH_SCREEN = 0x00,
-    MENU,
-    SETTINGS_MENU
-};
+#define DEFAULT_RESOLUTION {600, 800}
 
-/// @brief Singleton Scene manager
+/// Singleton Scene manager
+/// @brief responsible to Load and control the scenes in runtime
 class SceneManager
 {
 private:
-    std::unique_ptr<Scene> Active_Scene;
-    std::unique_ptr<sf::Window> Active_window;
+    std::unique_ptr<Scene> m_Active_Scene;
+    std::unique_ptr<sf::RenderWindow> m_Active_window;
+
+    std::unique_ptr<std::thread> m_Scene_Thread;
 
     /* data */
     SceneManager(/* args */);
@@ -26,7 +26,13 @@ private:
     void operator=(const SceneManager&) = delete;
 
 public:
+
+    /// @return Pointer to the current Scene
     Scene* GetCurrentScene();
+    
+    /// @brief Getting scene pointer and Setting it as the active scene and running start function
+    /// @param new_scene The scene to load (the pointer will be set into unique_ptr and will handle the delete memory)
+    /// @note Will relocate the new_scene memory
     void SetCurrentScene(Scene* new_scene);
 
     /// @brief Too allow singleton we used this function to create single static object of this class

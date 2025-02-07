@@ -2,7 +2,13 @@
 
 Scene *SceneManager::GetCurrentScene()
 {
-    return Active_Scene.get();
+    return m_Active_Scene.get();
+}
+
+void SceneManager::SetCurrentScene(Scene *new_scene)
+{
+    this->m_Active_Scene = std::make_unique<Scene>(std::move(new_scene));
+    
 }
 
 SceneManager *SceneManager::GetIntance()
@@ -13,5 +19,5 @@ SceneManager *SceneManager::GetIntance()
 
 SceneManager::SceneManager()
 {
-    this->Active_window = std::make_unique<sf::Window>(sf::VideoMode({600,800}), "GamePI Window", sf::Style::Fullscreen);
+    this->m_Active_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(DEFAULT_RESOLUTION), "GamePI Window", sf::Style::Fullscreen);
 }

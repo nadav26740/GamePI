@@ -36,6 +36,7 @@
 .editorconfig
 
 # build
+bin/
 debug/
 release/
 
