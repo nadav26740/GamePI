@@ -4,7 +4,7 @@ AssetsCacheManager::AssetsCacheManager()
 {
 }
 
-void AssetsCacheManager::print_all_texturemap()
+void AssetsCacheManager::Print_All_AssetsMap()
 {
 
     std::cout << cpp_colors::foreground::bright_blue << std::endl << "=====================Textures=====================" << cpp_colors::style::reset << std::endl;
@@ -18,6 +18,10 @@ void AssetsCacheManager::print_all_texturemap()
     {
         std::cout << itr->first << ":" << itr->second << std::endl;
     }
+
+    // TODO SOUNDS
+    // TODO FONTS
+
     std::cout << cpp_colors::foreground::bright_blue << "===============Assets Cache Manager===============" << cpp_colors::style::reset << std::endl;
 }
 
@@ -88,7 +92,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
     
     // TODO: Sounds
 
-    print_all_texturemap();
+    Print_All_AssetsMap();
 
     return false;
 }
@@ -152,7 +156,7 @@ bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesys
 
 #ifdef DEBUG
     std::cout << "[Debug (Assets Cache Manager)] Loaded Texture: " << path << ": " << &this->m_Texture_map[path] << std::endl;
-    //print_all_texturemap();
+    //Print_All_AssetsMap();
 #endif
 
     return true;

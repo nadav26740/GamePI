@@ -86,7 +86,7 @@ protected:
     std::vector<std::string> Failed_To_Load;
     std::vector<std::string> json_loaded;
 
-    void print_all_texturemap();
+    void Print_All_AssetsMap();
 
 public:    
 
