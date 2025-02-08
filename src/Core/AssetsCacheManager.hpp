@@ -115,7 +115,14 @@ public:
     /// @param path of the soundbuffer
     /// @return True if successed to load the soundbuffer
     /// @attention Assets of the same type with similer paths will overwrite the loaded 
-    virtual void LoadSoundBuffer(const std::string& name, const std::filesystem::path& path);
+    virtual bool LoadSoundBuffer(const std::string& name, const std::filesystem::path& path);
+
+    /// @brief Getting name and path and loading font to the cache with that name as key
+    /// @param name that will saved in the font cache
+    /// @param path the path of the font to load
+    /// @return True if successed to load the font
+    /// @attention Assets of the same type with similer paths will overwrite the loaded 
+    virtual bool LoadFont(const std::string& name, const std::filesystem::path& path);
     
     // * Getters
 
@@ -126,9 +133,15 @@ public:
     virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name);
     
     /// @brief Getting Texture from the mapped assets
-    /// @param name of the Texture to get
-    /// @return Texture or nullptr if Texture not found
+    /// @param name Key name of the Texture
+    /// @return Texture Pointer or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name);
+
+    /// @brief Getting Font from the mapped assets
+    /// @param name Key name of the Font
+    /// @return Font Pointer or nullptr if Texture not found
+    virtual const sf::Font* GetFont(const std::string &name);
+
 
     /// @todo Implement a status 
     virtual AssetsCacheStatus GetStatus();

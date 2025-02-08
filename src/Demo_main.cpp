@@ -13,7 +13,7 @@
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
 
-#define FRAME_LIMIT 59
+#define FRAME_LIMIT 30
 
 #define ICON_PATH "../assets/GamePIicon.png"
 #define FONT_PATH "../assets/GameFont.ttf"
@@ -31,14 +31,7 @@ int main()
     
     AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
 
-    
-    if (!Main_Font.loadFromFile(FONT_PATH))
-    {
-        std::cerr << "Failed to load font " << FONT_PATH << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    sf::Text Logo_text("Demo Game PI", Main_Font);
+    sf::Text Logo_text("Demo Game PI", *AssetsCacheManager::GetIntance()->GetFont("GameFont"));
 
     AssetsCacheManager::GetIntance();
     
