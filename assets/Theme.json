@@ -1,0 +1,31 @@
+{
+    "Metadata":
+    {
+        "Theme_name": "Default_Theme",
+        "Theme_Version": 0.1
+    },
+
+    "Textures": [
+        {
+            "name": "Error_texture",
+            "path": "Textures/Error.png"
+        },
+        {
+            "name": "GamePI_Icon",
+            "path": "Textures/GamePIicon.png"
+        }
+    ],
+
+    "Sounds": [],
+
+    "Fonts": [
+        {
+            "name": "GameFont",
+            "path": "Fonts/GameFont.ttf"
+        },
+        {
+            "name": "Default_Font",
+            "path": "Fonts/GameFont.ttf"
+        }
+    ]
+}
