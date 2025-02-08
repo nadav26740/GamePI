@@ -7,7 +7,7 @@ AssetsCacheManager::AssetsCacheManager()
 void AssetsCacheManager::print_all_texturemap()
 {
 
-    std::cout << std::endl << "=====================Textures=====================" << std::endl;
+    std::cout << cpp_colors::foreground::bright_blue << std::endl << "=====================Textures=====================" << cpp_colors::style::reset << std::endl;
     for (auto itr = this->m_Texture_map.begin(); itr != this->m_Texture_map.end(); itr++)
     {
         std::cout << itr->first << ":" << &(itr->second) << std::endl;
@@ -18,7 +18,7 @@ void AssetsCacheManager::print_all_texturemap()
     {
         std::cout << itr->first << ":" << itr->second << std::endl;
     }
-    std::cout << "===============Assets Cache Manager===============" << std::endl;
+    std::cout << cpp_colors::foreground::bright_blue << "===============Assets Cache Manager===============" << cpp_colors::style::reset << std::endl;
 }
 
 AssetsCacheManager *AssetsCacheManager::GetIntance()
@@ -27,9 +27,70 @@ AssetsCacheManager *AssetsCacheManager::GetIntance()
     return &INSTANCE;
 }
 
-void AssetsCacheManager::LoadTheme(const std::string &path)
+bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
 {
-    std::cout << "AssetsCacheManager::LoadTheme [WIP]" << std::endl;
+    std::cout << cpp_colors::foreground::bright_blue << "[Assets Cache Manager] Trying to load theme path [" << dir_path << "]" << cpp_colors::style::reset << std::endl;
+
+    // Checking path
+    if (!std::filesystem::exists(dir_path))
+    {
+        std::cerr << cpp_colors::foreground::bright_red << "[ERROR (Assets Cache Manager)] Failed to Load Theme - " << dir_path << " Isn't a exists!" << std::endl;
+        return false;
+    }
+
+    if (!std::filesystem::is_directory(dir_path))
+    {
+        std::cerr << cpp_colors::foreground::bright_red << "[ERROR (Assets Cache Manager)] Failed to Load Theme - " << dir_path << " Isn't a directory" << std::endl;
+        return false;
+    }
+
+    // looking for the Theme.json file (Config file)
+    std::filesystem::path config_path = dir_path.string() + "/Theme.json";
+
+#ifdef DEBUG
+    cpp_colors::colorful_print( "[DEBUG (Assets Cache Manager)] Looking For Theme.json", cpp_colors::foreground::blue);
+    cpp_colors::colorful_print( "[DEBUG (Assets Cache Manager)] path checking: " + config_path.string(), cpp_colors::foreground::blue);
+#endif
+
+    // Checking path
+    if (!std::filesystem::exists(config_path))
+    {
+        std::cerr << cpp_colors::foreground::bright_red << "[ERROR (Assets Cache Manager)] Failed to Load Theme - " << config_path << " missing!" << std::endl;
+        return false;
+    }
+
+    // Loading json
+    std::ifstream json_file(config_path);
+    nlohmann::json theme_config = nlohmann::json::parse(json_file);
+    
+    std::string asset_name;
+    std::filesystem::path asset_path;
+    std::vector<std::map<std::string, std::string>> objects_arrays;
+
+    json_file.close();
+
+    double version = theme_config.at("Metadata").at("Theme_Version");
+    std::string theme_name = theme_config.at("Metadata").at("Theme_name");
+    
+#ifdef DEBUG
+    cpp_colors::colorful_print("[DEBUG (Assets Cache Manager] Loaded config: name: " + theme_name + " Ver: " + std::to_string(version), cpp_colors::foreground::bright_blue);
+#endif
+
+    // Loading Textures
+    for (auto &obj : theme_config.at("Textures").items())
+    {
+        asset_name = obj.value()["name"];
+        asset_path = dir_path.string() + "/" + (std::string)obj.value()["path"];
+        this->LoadTexture(asset_name, asset_path);
+    }
+
+    // TODO: Fonts
+    
+    // TODO: Sounds
+
+    print_all_texturemap();
+
+    return false;
 }
 
 const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name)
@@ -48,6 +109,7 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
     if (key_itr == this->m_Texture_keys_map.end())
     {
         cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed to find Texture key:" + name, cpp_colors::foreground::bright_red, std::cerr);
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Loading Error Texture:" + name, cpp_colors::foreground::bright_red, std::cerr);
         return this->Error_texture;
     }
 
@@ -60,6 +122,7 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
     if (texture_itr == this->m_Texture_map.end())
     {
         cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed to get Texture: " + name, cpp_colors::foreground::bright_red, std::cerr);
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Loading Error Texture:" + name, cpp_colors::foreground::bright_red, std::cerr);
         return this->Error_texture;
     }
 
@@ -72,7 +135,7 @@ bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesys
     if (!loaded_texture.loadFromFile(path))
     {
         cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load Texture " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
-        this->Failed_To_Load.emplace_back(name + ": " + path.string());
+        this->Failed_To_Load.emplace_back(name + ": " + path.string());     
         return false;
     }
 
@@ -84,7 +147,7 @@ bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesys
     if (name == "Error_texture")
     {
         this->Error_texture = &this->m_Texture_map[path];
-        cpp_colors::colorful_print("[AssetsCacheManager]Error Texture Loaded", cpp_colors::foreground::bright_red, std::cerr);
+        cpp_colors::colorful_print("[AssetsCacheManager] Error Texture Loaded", cpp_colors::foreground::bright_green, std::cerr);
     }
 
 #ifdef DEBUG

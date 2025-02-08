@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <string>
 #include <string_view>
@@ -99,7 +100,7 @@ public:
     /// @brief Getting theme folder path and loading assets as written in the json config
     /// @param path theme folder path
     /// @attention Assets of the same type with similer paths will overwrite the loaded 
-    virtual void LoadTheme(const std::string& path /* = DEFAULT_ASSETS_JSON_PATH */);
+    virtual bool LoadTheme(const std::filesystem::path dir_path /* = DEFAULT_ASSETS_JSON_PATH */);
 
     /// @brief Getting name and path and loading texture to the cache with that name as key
     /// @param name that will saved in the texture cache
@@ -124,7 +125,6 @@ public:
     /// @return Soundbuffer or nullptr if soundbuffer not found
     virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name);
     
-    /// @todo Get Texture pointer from the assets cache
     /// @brief Getting Texture from the mapped assets
     /// @param name of the Texture to get
     /// @return Texture or nullptr if Texture not found

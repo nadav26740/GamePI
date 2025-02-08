@@ -10,6 +10,7 @@
 #include "libs/SFMLBoost/BoostSFML.hpp"
 #include "libs/SFMLBoost/ObjectsGroup.hpp"
 
+#include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
 
 #define FRAME_LIMIT 59
@@ -24,37 +25,24 @@ int main()
     std::cout << "================== RUNNING DEMO MAIN ==================" << std::endl;
     
     sf::RenderWindow window(sf::VideoMode({640, 480}), "Demo GamePI!", sf::Style::Fullscreen);
-    sf::Texture icon_texture;
     sf::Sprite icon_sprite;
     sf::Font Main_Font;
     sf::Vector2f temp;
     
+    AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
 
-    sf::Text Logo_text("Demo Game PI", Main_Font);
     
-    if (!AssetsCacheManager::GetIntance()->LoadTexture("Icon_sprite" , ICON_PATH))
-    {
-        std::cerr << "Failed to load icon Texture" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    if (!icon_texture.loadFromFile(ICON_PATH))
-    {
-        std::cerr << "Failed to load icon Texture" << std::endl;
-        exit(EXIT_FAILURE);
-    }
     if (!Main_Font.loadFromFile(FONT_PATH))
     {
         std::cerr << "Failed to load font " << FONT_PATH << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    AssetsCacheManager::GetIntance();
+    sf::Text Logo_text("Demo Game PI", Main_Font);
 
-    // ! testing nomral sprite
-    icon_texture.setSmooth(false);
+    AssetsCacheManager::GetIntance();
     
-    icon_sprite.setTexture(*(AssetsCacheManager::GetIntance()->GetTexture("Icon_sprite")));
+    icon_sprite.setTexture(*(AssetsCacheManager::GetIntance()->GetTexture("GamePI_Icon")));
     icon_sprite.scale(4.0f, 4.0f);
     SFMLBoost::CenterASprite(&icon_sprite, &window);
 
@@ -67,7 +55,7 @@ int main()
 
     // !TESTING THE OBJECT WRAPPER
     std::shared_ptr shared_sprite_tester = std::make_shared<sf::Sprite>();
-    shared_sprite_tester->setTexture(icon_texture);
+    shared_sprite_tester->setTexture(*(AssetsCacheManager::GetIntance()->GetTexture("GamePI_Icon")));
     std::shared_ptr test_subject = std::make_shared<SFMLBoost::Object_wrapper>(shared_sprite_tester, shared_sprite_tester.get());
 
     std::shared_ptr circle_sprite = std::make_shared<sf::CircleShape>();
