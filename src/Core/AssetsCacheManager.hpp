@@ -13,6 +13,7 @@
 
 #include "MacroFlags.hpp"
 
+#define DEFAULT_ASSETS_PATH "../Assets"
 #define CONFIG_FILE_NAME "assets.conf"
 #define CONFIG_FOLDER_NAME "Assets"
 
@@ -92,12 +93,31 @@ public:
     /// @return the Intance of the current AssetsCache
     static AssetsCacheManager* GetIntance();
 
+    // * Loaders
+
     /// @todo Load Assets From jsonfile (Like texture pack [Theme]) 
-    /// @brief Loading Assets as writen on Json
-    /// @attention Assets of the same type with similer names will overwrite the loaded 
-    /// @param path Json presenting data on theme location
-    virtual void LoadFromJson(const std::string& path /* = DEFAULT_ASSETS_JSON_PATH */);
+    /// @brief Getting theme folder path and loading assets as written in the json config
+    /// @param path theme folder path
+    /// @attention Assets of the same type with similer paths will overwrite the loaded 
+    virtual void LoadTheme(const std::string& path /* = DEFAULT_ASSETS_JSON_PATH */);
+
+    /// @brief Getting name and path and loading texture to the cache with that name as key
+    /// @param name that will saved in the texture cache
+    /// @param path the path of the texture to load
+    /// @return True if successed to load the texture
+    /// @attention Assets of the same type with similer paths will overwrite the loaded 
+    virtual bool LoadTexture(const std::string& name, const std::filesystem::path& path);
     
+    /// @todo *!!!
+    /// @brief Getting name and path and loading Soundbuffer to the cache with that name as key
+    /// @param name the key name that will be saved in the soundbuffer cache
+    /// @param path of the soundbuffer
+    /// @return True if successed to load the soundbuffer
+    /// @attention Assets of the same type with similer paths will overwrite the loaded 
+    virtual void LoadSoundBuffer(const std::string& name, const std::filesystem::path& path);
+    
+    // * Getters
+
     /// @todo Get Soundbuffer pointer from the assets cache
     /// @brief Getting SoundBuffer from the mapped assets
     /// @param name of the soundbuffer to get
@@ -109,25 +129,6 @@ public:
     /// @param name of the Texture to get
     /// @return Texture or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name);
-
-
-    /// @brief 
-    /// @param name 
-    /// @return 
-    // virtual const sf::Font* GetFont(const std::string &name);
-
-    /// @brief Getting name and path and loading texture to the cache with that name as key
-    /// @param name that will saved in the texture cache
-    /// @param path the path of the texture to load
-    /// @return True if successed to load the texture
-    virtual bool LoadTexture(const std::string& name, const std::filesystem::path& path);
-
-    /// @todo *!!!
-    /// @brief Getting name and path and loading Soundbuffer to the cache with that name as key
-    /// @param name the key name that will be saved in the soundbuffer cache
-    /// @param path of the soundbuffer
-    /// @return True if successed to load the soundbuffer
-    virtual void LoadSoundBuffer(const std::string& name, const std::filesystem::path& path);
 
     /// @todo Implement a status 
     virtual AssetsCacheStatus GetStatus();

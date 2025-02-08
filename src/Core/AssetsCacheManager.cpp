@@ -27,9 +27,9 @@ AssetsCacheManager *AssetsCacheManager::GetIntance()
     return &INSTANCE;
 }
 
-void AssetsCacheManager::LoadFromJson(const std::string &path)
+void AssetsCacheManager::LoadTheme(const std::string &path)
 {
-    std::cout << "AssetsCacheManager::LoadFromJson [WIP]" << std::endl;
+    std::cout << "AssetsCacheManager::LoadTheme [WIP]" << std::endl;
 }
 
 const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name)
