@@ -110,8 +110,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
         this->LoadTexture(asset_name, asset_path);
     }
 
-    // TODO: Fonts
-    // Loading Textures
+    // Loading Fonts
     for (auto &obj : theme_config.at("Fonts").items())
     {
         asset_name = obj.value()["name"];
@@ -119,11 +118,18 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
         this->LoadFont(asset_name, asset_path);
     }
     
-    // TODO: Sounds
+    // Sounds
+    for (auto &obj : theme_config.at("Sounds").items())
+    {
+        asset_name = obj.value()["name"];
+        asset_path = dir_path.string() + "/" + (std::string)obj.value()["path"];
+        this->LoadSoundBuffer(asset_name, asset_path);
+    }
+
 
     Print_All_AssetsMap();
 
-    return false;
+    return true;
 }
 
 const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name)

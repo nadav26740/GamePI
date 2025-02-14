@@ -96,10 +96,10 @@ public:
 
     // * Loaders
 
-    /// @todo Load Assets From jsonfile (Like texture pack [Theme]) 
     /// @brief Getting theme folder path and loading assets as written in the json config
-    /// @param path theme folder path
+    /// @param dir_path theme folder path
     /// @attention Assets of the same type with similer paths will overwrite the loaded 
+    /// @return Returning true if successed and false if failed!
     virtual bool LoadTheme(const std::filesystem::path dir_path /* = DEFAULT_ASSETS_JSON_PATH */);
 
     /// @brief Getting name and path and loading texture to the cache with that name as key
