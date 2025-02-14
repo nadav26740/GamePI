@@ -164,15 +164,22 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
 
 bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesystem::path &path)
 {
-    sf::Texture loaded_texture;
-    if (!loaded_texture.loadFromFile(path))
-    {
-        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load Texture " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
-        this->Failed_To_Load.emplace_back("[Texture]" +  name + ": " + path.string());     
-        return false;
-    }
 
-    this->m_Texture_map[path] = loaded_texture;
+    // Checking if texute in path hasn't been loaded before
+    if (this->m_Texture_map.find(path) == this->m_Texture_map.end())
+    {
+        sf::Texture loaded_texture;
+        if (!loaded_texture.loadFromFile(path))
+        {
+            cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load Texture " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
+            this->Failed_To_Load.emplace_back("[Texture]" +  name + ": " + path.string());     
+            return false;
+        }
+    
+    
+        this->m_Texture_map[path] = loaded_texture;        
+    }
+    
     this->m_Texture_keys_map[name] = path;
     std::cout << "[Assets Cache Manager] Loading: " << name << ": " << path << std::endl;
 
@@ -199,15 +206,21 @@ bool AssetsCacheManager::LoadSoundBuffer(const std::string &name, const std::fil
 
 bool AssetsCacheManager::LoadFont(const std::string &name, const std::filesystem::path &path)
 {
-    sf::Font _font;
-    if (!_font.loadFromFile(path))
-    {
-        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load Font " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
-        this->Failed_To_Load.emplace_back("[Font]" + name + ": " + path.string());     
-        return false;
-    }
 
-    this->m_Fonts_map[path] = _font;
+    // Checking if path hasn't been loaded before
+    if (this->m_Fonts_map.find(path) == this->m_Fonts_map.end())
+    {
+        sf::Font _font;
+        if (!_font.loadFromFile(path))
+        {
+            cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load Font " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
+            this->Failed_To_Load.emplace_back("[Font]" + name + ": " + path.string());     
+            return false;
+        }
+    
+        this->m_Fonts_map[path] = _font;
+    }
+    
     this->m_Fonts_keys_map[name] = path;
 
     // Checking if default error texture

@@ -1,0 +1,169 @@
+<mxfile host="65bd71144e">
+    <diagram id="BsoRfmZZvr9gLzZOgLKa" name="Page-1">
+        <mxGraphModel dx="1128" dy="647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="850" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Assets Cache Manager" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=19;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="640" y="30" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Load Asset" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=19;labelBorderColor=default;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="330" y="70" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="7" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Getting Path and key name" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="140" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="No" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="10" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Yes" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="10" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="50" y="280"/>
+                            <mxPoint x="50" y="720"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Is path already loaded?" style="rhombus;whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="240" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="12" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Loading asset in path" style="whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="370" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="Searching path" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="14" target="46" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="880" y="330"/>
+                            <mxPoint x="880" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="Assets map" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;labelBorderColor=none;fontSize=15;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="760" y="290" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="No" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="16" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="Yes" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="16" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Is asset loaded" style="rhombus;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="460" width="180" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Return false" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=15;labelBorderColor=none;strokeColor=#FF3333;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="470" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Path: Asset" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=15;" parent="1" source="21" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="690" y="610"/>
+                            <mxPoint x="690" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="21" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Saving asset in map" style="whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="580" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="Key_name: Path" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=15;" parent="1" source="24" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="730" y="720"/>
+                            <mxPoint x="730" y="450"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" value="" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="24" target="30" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="Saving path and key and map" style="whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="690" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="Searching key" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="27" target="40" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="930" y="450"/>
+                            <mxPoint x="930" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="Keys map" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;labelBorderColor=none;fontSize=15;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+                    <mxGeometry x="760" y="410" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="yes" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="30" target="32" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="No" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="30" target="34" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="150" y="860"/>
+                            <mxPoint x="150" y="1080"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="Is the key equal to the Default key" style="rhombus;whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="810" width="280" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="32" target="34" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="Saving asset pointer as default asset" style="whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="950" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="Return True&lt;br&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="1050" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="38" target="40" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="Getting Key" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="1000" y="140" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="Get Asset" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=19;labelBorderColor=default;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="1030" y="70" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="No" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="40" target="44" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="Yes" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="40" target="46" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="Is Key exists?" style="rhombus;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="230" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="Return Default Asset" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="1220" y="240" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="46" target="49" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="Getting asset based on path from key" style="whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1000" y="410" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="No" style="edgeStyle=none;html=1;fontSize=15;" parent="1" source="49" target="51" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="Yes" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;" parent="1" source="49" target="53" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="Is asset found" style="rhombus;whiteSpace=wrap;html=1;fontSize=15;labelBorderColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="540" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="Return Default Asset" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="1220" y="550" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="Return asset pointer" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;labelBorderColor=none;fontSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="995" y="660" width="130" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
