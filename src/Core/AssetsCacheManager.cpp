@@ -45,6 +45,20 @@ void AssetsCacheManager::Print_All_AssetsMap()
     std::cout << cpp_colors::foreground::bright_blue << "===============Assets Cache Manager===============" << cpp_colors::style::reset << std::endl;
 }
 
+void AssetsCacheManager::HardResetAssets()
+{
+    this->m_Fonts_keys_map.clear();
+    this->m_Fonts_map.clear();
+    this->m_SoundBuffer_keys_map.clear();
+    this->m_SoundBuffer_map.clear();
+    this->m_Texture_keys_map.clear();
+    this->m_Texture_map.clear();
+
+    this->Default_Font = nullptr;
+    this->Error_SoundBuffer = nullptr;
+    this->Error_texture = nullptr;
+}
+
 AssetsCacheManager *AssetsCacheManager::GetIntance()
 {
     static AssetsCacheManager INSTANCE;

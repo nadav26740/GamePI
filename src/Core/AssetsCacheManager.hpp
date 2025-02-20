@@ -1,4 +1,7 @@
 #pragma once
+#ifndef ASSETSCACHEMANAGER_HPP
+#define ASSETSCACHEMANAGER_HPP
+
 #include <iostream>
 #include <fstream>
 #include <memory>
@@ -88,7 +91,11 @@ protected:
 
     void Print_All_AssetsMap();
 
-public:    
+public:
+
+    /// @brief will reset all the current assets loaded and unloaded theme
+    /// @warning This isn't a reverasble action!
+    void HardResetAssets();
 
     /// @brief Too allow singleton we used this function to create single static object of this class
     /// @return the Intance of the current AssetsCache
@@ -146,3 +153,4 @@ public:
     /// @todo Implement a status 
     virtual AssetsCacheStatus GetStatus();
 };
+#endif
