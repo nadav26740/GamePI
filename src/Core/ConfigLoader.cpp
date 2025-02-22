@@ -24,13 +24,15 @@ bool ConfigLoader::SaveConfig(const std::filesystem::path &config_path)
     js[KEY_EMULATOR_FLAGS] = m_Emulator_Flags;
     js[KEY_EMULATOR_NAME] = m_Emulator_name;
     js[KEY_THEME_PATH] = m_Theme_path;    
+    js[KEY_GAMES_DIRECTORY] = m_games_directory;
 
     try
     {    
         std::ofstream output_file(config_path);
         if (!output_file.is_open())
         {
-            std::cerr << "[ERROR (ConfigLoader::SaveConfig)] Failed To open Save file: " << config_path << std::endl;
+            cpp_colors::colorful_print("[ERROR (ConfigLoader::SaveConfig)] Failed To open Save file: " + config_path.string(), 
+                                        cpp_colors::foreground::bright_red, std::cerr);
             return false;
         }
 
@@ -67,9 +69,10 @@ bool ConfigLoader::LoadConfig(const std::filesystem::path &config_path, bool Set
     nlohmann::json js;
     std::fstream config_file_handler;
     config_file_handler.open(config_path);
-    config_file_handler.close();
 
     js = nlohmann::json::parse(config_file_handler);
+
+    config_file_handler.close();
 
     // reading data
     float version = 0.0;

@@ -15,15 +15,15 @@
 #include "MacroFlags.hpp"
 
 // Defines
-#define DEFAULT_CONFIG_LOADER_PATH "~/.GamePI.config"
+#define DEFAULT_CONFIG_LOADER_PATH std::string(std::getenv("HOME")) + "/.GamePI.config"
 #define CONFIG_LOADER_VER 0.1
 #define CONFIG_LOADER_VER_0_1
 
-#define DEFAULT_DEFAULT_ASSETS_PATH "~/GAMEPI/Assets"
+#define DEFAULT_DEFAULT_ASSETS_PATH std::string(std::getenv("HOME")) + "/GAMEPI/Assets"
 #define DEFAULT_THEME_PATH ""
 #define DEFAULT_EMULATOR_NAME "mgba"
 #define DEFAULT_EMULATOR_FLAGS "-f"
-#define DEFAULT_GAMES_DIRECTORY "~/EMULATOR_GAMES"
+#define DEFAULT_GAMES_DIRECTORY std::string(std::getenv("HOME")) + "/EMULATOR_GAMES"
 
 #define KEY_DEFAULT_ASSETS_PATH "Assets_Directory"
 #define KEY_THEME_PATH "Theme"
