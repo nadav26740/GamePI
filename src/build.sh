@@ -7,6 +7,7 @@ CODE_FILES=(
     "libs/SFMLBoost/BoostSFML.cpp"
     "libs/SFMLBoost/ObjectsGroup.cpp"
     "Core/AssetsCacheManager.cpp"
+    "Core/ConfigLoader.cpp"
 )
 
 # To link an SFML library, you must add "-lsfml-{lib}"

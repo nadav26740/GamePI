@@ -12,6 +12,7 @@
 
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
+#include "Core/ConfigLoader.hpp"
 
 #define FRAME_LIMIT 30
 
@@ -28,6 +29,9 @@ int main()
     sf::Sprite icon_sprite;
     sf::Font Main_Font;
     sf::Vector2f temp;
+
+    ConfigLoader::GetIntance()->SaveConfig();
+    ConfigLoader::GetIntance()->LoadConfig();
     
     AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
 

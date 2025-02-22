@@ -93,7 +93,7 @@ protected:
 
 public:
 
-    /// @brief will reset all the current assets loaded and unloaded theme
+    /// @brief will reset all the current loaded assets and unload them
     /// @warning This isn't a reverasble action!
     void HardResetAssets();
 
