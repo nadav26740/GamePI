@@ -70,7 +70,26 @@ bool ConfigLoader::LoadConfig(const std::filesystem::path &config_path, bool Set
     std::fstream config_file_handler;
     config_file_handler.open(config_path);
 
-    js = nlohmann::json::parse(config_file_handler);
+    // Checking if the file has been opened
+    if (!config_file_handler.is_open())
+    {
+        cpp_colors::colorful_print("[ERROR (ConfigLoader::LoadConfig)] Failed To Open the Config File" + config_path.string(), 
+                                        cpp_colors::foreground::bright_red, std::cerr);
+        return false;
+    }
+
+    // Trying to parse the file into json format
+    try
+    {
+        js = nlohmann::json::parse(config_file_handler);
+    }
+    catch(const std::exception& e)
+    {
+        cpp_colors::colorful_print("[ERROR (ConfigLoader::LoadConfig)] Failed To Read Config file: " + config_path.string() + ": " + e.what(), 
+                                        cpp_colors::foreground::bright_red, std::cerr);
+        return false;
+    }
+
 
     config_file_handler.close();
 
