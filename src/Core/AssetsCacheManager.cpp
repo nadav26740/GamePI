@@ -205,20 +205,20 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
         return this->Error_texture;
     }
 
-    auto Font_itr = this->m_Texture_map.find(key_itr->second);
+    auto Texture_itr = this->m_Texture_map.find(key_itr->second);
 
 #ifdef DEBUG
     std::cout << "[DEBUG (Assets Cache Manager)] Getting Texture (" << key_itr->first << ": " << key_itr->second << ")" << std::endl;
 #endif
 
-    if (Font_itr == this->m_Texture_map.end())
+    if (Texture_itr == this->m_Texture_map.end())
     {
         cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed to get Texture: " + name, cpp_colors::foreground::bright_red, std::cerr);
         cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Loading Error Texture:" + name, cpp_colors::foreground::bright_red, std::cerr);
         return this->Error_texture;
     }
 
-    return &(Font_itr->second);
+    return &(Texture_itr->second);
 }
 
 bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesystem::path &path)
