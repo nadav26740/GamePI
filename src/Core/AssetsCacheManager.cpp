@@ -21,7 +21,7 @@ void AssetsCacheManager::Print_All_AssetsMap()
     std::cout << "===================Textures_keys==================" << std::endl << std::endl;
 
     // TODO FONTS
-    std::cout << cpp_colors::foreground::bright_blue << std::endl << "======================Fonts======================" << cpp_colors::style::reset << std::endl;
+    std::cout << cpp_colors::foreground::bright_blue << std::endl << "=====================Fonts=====================" << cpp_colors::style::reset << std::endl;
     for (auto itr = this->m_Fonts_map.begin(); itr != this->m_Fonts_map.end(); itr++)
     {
         std::cout << itr->first << ":" << &(itr->second) << std::endl;
@@ -34,6 +34,21 @@ void AssetsCacheManager::Print_All_AssetsMap()
     }
     std::cout << "===================Fonts_keys==================" << std::endl << std::endl;
 
+    // * Sounds
+    std::cout << cpp_colors::foreground::bright_blue << std::endl << "=====================Sounds====================" << cpp_colors::style::reset << std::endl;
+    for (auto itr = this->m_SoundBuffer_map.begin(); itr != this->m_SoundBuffer_map.end(); itr++)
+    {
+        std::cout << itr->first << ":" << &(itr->second) << std::endl;
+    }
+    std::cout << "=====================Sounds====================" << std::endl << std::endl;
+    std::cout << "===================Sounds_keys=================" << std::endl;
+    for (auto itr = this->m_SoundBuffer_keys_map.begin(); itr != this->m_SoundBuffer_keys_map.end(); itr++)
+    {
+        std::cout << itr->first << ":" << itr->second << std::endl;
+    }
+    std::cout << "===================Sounds_keys=================" << std::endl << std::endl;
+
+    // ! Failures
     std::cout << std::endl << cpp_colors::foreground::bright_red << "====================Failures===================" << cpp_colors::style::reset << std::endl;
     for (auto failed_str : this->Failed_To_Load)
     {
@@ -116,7 +131,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
     cpp_colors::colorful_print("[DEBUG (Assets Cache Manager] Loaded config: name: " + theme_name + " Ver: " + std::to_string(version), cpp_colors::foreground::bright_blue);
 #endif
 
-    // Loading Textures
+    // * Loading Textures
     for (auto &obj : theme_config.at("Textures").items())
     {
         asset_name = obj.value()["name"];
@@ -124,7 +139,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
         this->LoadTexture(asset_name, asset_path);
     }
 
-    // Loading Fonts
+    // * Loading Fonts
     for (auto &obj : theme_config.at("Fonts").items())
     {
         asset_name = obj.value()["name"];
@@ -132,7 +147,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
         this->LoadFont(asset_name, asset_path);
     }
     
-    // Sounds
+    // * Loading Sounds
     for (auto &obj : theme_config.at("Sounds").items())
     {
         asset_name = obj.value()["name"];
@@ -148,8 +163,32 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
 
 const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name)
 {
-    std::cout << "AssetsCacheManager::GetSoundBuffer [WIP]" << std::endl;
-    return nullptr;
+#ifdef DEBUG
+    std::cout << "[DEBUG (Assets Cache Manager)] Trying to get SoundBuffer: " << name << std::endl;
+#endif
+
+    auto key_itr = this->m_SoundBuffer_keys_map.find(name);
+    if (key_itr == this->m_SoundBuffer_keys_map.end())
+    {
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed to find SoundBuffer key:" + name, cpp_colors::foreground::bright_red, std::cerr);
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Loading Error SoundBuffer:" + name, cpp_colors::foreground::bright_red, std::cerr);
+        return this->Error_SoundBuffer;
+    }
+
+    auto Sound_itr = this->m_SoundBuffer_map.find(key_itr->second);
+
+#ifdef DEBUG
+    std::cout << "[DEBUG (Assets Cache Manager)] Getting SoundBuffer (" << key_itr->first << ": " << key_itr->second << ")" << std::endl;
+#endif
+
+    if (Sound_itr == this->m_SoundBuffer_map.end())
+    {
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed to get SoundBuffer: " + name, cpp_colors::foreground::bright_red, std::cerr);
+        cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Loading Error SoundBuffer:" + name, cpp_colors::foreground::bright_red, std::cerr);
+        return this->Error_SoundBuffer;
+    }
+
+    return &(Sound_itr->second);
 }
 
 const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
@@ -220,8 +259,34 @@ bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesys
 
 bool AssetsCacheManager::LoadSoundBuffer(const std::string &name, const std::filesystem::path &path)
 {
-    // TODO
-    return false;
+    // Checking if path hasn't been loaded before
+    if (this->m_SoundBuffer_map.find(path) == this->m_SoundBuffer_map.end())
+    {
+        sf::SoundBuffer _Buffer;
+        if (!_Buffer.loadFromFile(path))
+        {
+            cpp_colors::colorful_print("[ERROR (Assets Cache Manager)] Failed To Load SoundBuffer " + path.string(), cpp_colors::foreground::bright_red, std::cerr);
+            this->Failed_To_Load.emplace_back("[SoundBuffer]" + name + ": " + path.string());     
+            return false;
+        }
+    
+        this->m_SoundBuffer_map[path] = _Buffer;
+    }
+    
+    this->m_SoundBuffer_keys_map[name] = path;
+
+    // Checking if default error texture
+    if (name == "Error_Sound")
+    {
+        this->Error_SoundBuffer = &this->m_SoundBuffer_map[path];
+        cpp_colors::colorful_print("[AssetsCacheManager] Default SoundBuffer Loaded", cpp_colors::foreground::bright_green, std::cout);
+    }
+
+#ifdef DEBUG
+    std::cout << "[Debug (Assets Cache Manager)] Loaded SoundBuffer: " << path << ": " << &this->m_SoundBuffer_map[path] << std::endl;
+#endif
+
+    return true;
 }
 
 bool AssetsCacheManager::LoadFont(const std::string &name, const std::filesystem::path &path)
