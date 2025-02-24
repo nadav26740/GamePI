@@ -14,10 +14,10 @@ void ConfigLoader::ResetToDefault()
 
 bool ConfigLoader::SaveConfig(const std::filesystem::path &config_path)
 {
-    // TODO: Need to fix
 #ifdef DEBUG
     std::cout << "[ConfigLoader::SaveConfig] Saving config to " << config_path << std::endl;
 #endif
+
     nlohmann::json js;
     js[KEY_CONFIG_VER] = CONFIG_LOADER_VER;
     js[KEY_DEFAULT_ASSETS_PATH] = m_Default_assets_path;
@@ -104,8 +104,6 @@ bool ConfigLoader::LoadConfig(const std::filesystem::path &config_path, bool Set
     this->JsonIntoField(js, m_Emulator_name, KEY_EMULATOR_NAME);
     this->JsonIntoField(js, m_Emulator_Flags, KEY_EMULATOR_FLAGS);
     this->JsonIntoField(js, m_Theme_path, KEY_THEME_PATH);
-
-    this->m_Config_Changed = false;
 
 #ifdef DEBUG
     std::cout << "[DEBUG (ConfigLoader::LoadConfig)] Loaded Config" << js << std::endl;
