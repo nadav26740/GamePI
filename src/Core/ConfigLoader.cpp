@@ -18,7 +18,7 @@ bool ConfigLoader::SaveConfig(const std::filesystem::path &config_path)
     std::cout << "[ConfigLoader::SaveConfig] Saving config to " << config_path << std::endl;
 #endif
 
-    nlohmann::json js;
+     nlohmann::json js;
     js[KEY_CONFIG_VER] = CONFIG_LOADER_VER;
     js[KEY_DEFAULT_ASSETS_PATH] = m_Default_assets_path;
     js[KEY_EMULATOR_FLAGS] = m_Emulator_Flags;

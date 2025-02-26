@@ -18,7 +18,7 @@
 #include "MacroFlags.hpp"
 
 #define DEFAULT_ASSETS_PATH "../Assets"
-#define CONFIG_FILE_NAME "assets.conf"
+#define ASSETS_CONFIG_FILE_NAME "Theme.json"
 #define CONFIG_FOLDER_NAME "Assets"
 
 // * TODO: #define DEFAULT_ASSETS_JSON_PATH "TODO"
@@ -107,7 +107,7 @@ public:
     /// @param dir_path theme folder path
     /// @attention Assets of the same type with similer paths will overwrite the loaded 
     /// @return Returning true if successed and false if failed!
-    virtual bool LoadTheme(const std::filesystem::path dir_path /* = DEFAULT_ASSETS_JSON_PATH */);
+    virtual bool LoadTheme(const std::filesystem::path dir_path = DEFAULT_ASSETS_PATH);
 
     /// @brief Getting name and path and loading texture to the cache with that name as key
     /// @param name that will saved in the texture cache

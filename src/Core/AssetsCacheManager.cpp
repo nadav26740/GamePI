@@ -98,7 +98,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
     }
 
     // looking for the Theme.json file (Config file)
-    std::filesystem::path config_path = dir_path.string() + "/Theme.json";
+    std::filesystem::path config_path = dir_path.string() + ASSETS_CONFIG_FILE_NAME;
 
 #ifdef DEBUG
     cpp_colors::colorful_print( "[DEBUG (Assets Cache Manager)] Looking For Theme.json", cpp_colors::foreground::blue);
