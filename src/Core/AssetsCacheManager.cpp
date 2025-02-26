@@ -55,7 +55,6 @@ void AssetsCacheManager::Print_All_AssetsMap()
         std::cout << failed_str << std::endl;
     }
     std::cout << cpp_colors::foreground::bright_red << "====================Failures===================" << cpp_colors::style::reset << std::endl << std::endl;
-    // TODO SOUNDS
 
     std::cout << cpp_colors::foreground::bright_blue << "===============Assets Cache Manager===============" << cpp_colors::style::reset << std::endl;
 }

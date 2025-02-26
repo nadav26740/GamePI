@@ -137,3 +137,59 @@ ConfigLoader *ConfigLoader::GetIntance()
     static ConfigLoader intance;
     return &intance;
 }
+
+
+// * Getters
+
+std::filesystem::path ConfigLoader::GetThemePath()
+{
+    return this->m_Theme_path;
+}
+
+std::filesystem::path ConfigLoader::GetAssetsPath()
+{
+    return this->m_Default_assets_path;
+}
+
+std::string ConfigLoader::GetEmulatorFlags()
+{
+    return this->m_Emulator_Flags;
+}
+
+std::string ConfigLoader::GetEmulatorName()
+{
+    return this->m_Emulator_name;
+}
+
+std::filesystem::path ConfigLoader::GetGamesDirectory()
+{
+    return this->m_games_directory;
+}
+
+
+// * Setters
+
+void ConfigLoader::SetThemePath(std::filesystem::path value)
+{
+    this->m_Theme_path = value;
+}
+    
+void ConfigLoader::SetAssetsPath(std::filesystem::path value)
+{
+    this->m_Default_assets_path = value;
+}
+    
+void ConfigLoader::SetEmulatorFlags(std::string value)
+{
+    this->m_Emulator_Flags = value;
+}
+    
+void ConfigLoader::SetEmulatorName(std::string value)
+{
+    this->m_Emulator_name = value;
+}
+    
+void ConfigLoader::SetGamesDirectory(std::filesystem::path value)
+{
+    this->m_games_directory = value;
+}

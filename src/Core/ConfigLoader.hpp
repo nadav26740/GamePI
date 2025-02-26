@@ -83,8 +83,49 @@ public:
     /// @return True if successfuly saved the file
     bool SaveConfig(const std::filesystem::path& config_path = DEFAULT_CONFIG_LOADER_PATH);
 
-    // Add Gets
-    // Add sets
+    // * Getters
+    
+    /// @brief 
+    /// @return 
+    std::filesystem::path GetThemePath();
+    
+    /// @brief 
+    /// @return 
+    std::filesystem::path GetAssetsPath();
+    
+    /// @brief 
+    /// @return 
+    std::string GetEmulatorFlags();
+    
+    /// @brief 
+    /// @return 
+    std::string GetEmulatorName();
+    
+    /// @brief 
+    /// @return 
+    std::filesystem::path GetGamesDirectory();
+
+    // * Setters
+
+    /// @brief 
+    /// @param value 
+    void SetThemePath(std::filesystem::path value);
+    
+    /// @brief 
+    /// @param value 
+    void SetAssetsPath(std::filesystem::path value);
+    
+    /// @brief 
+    /// @param value 
+    void SetEmulatorFlags(std::string value);
+    
+    /// @brief 
+    /// @param value 
+    void SetEmulatorName(std::string value);
+    
+    /// @brief 
+    /// @param value 
+    void SetGamesDirectory(std::filesystem::path value);
 };
 
 #endif
