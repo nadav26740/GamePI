@@ -11,6 +11,7 @@
 namespace SFMLBoost
 {
     
+    /// @brief Class to wrap objects to allow them to be in objects_group
     class Object_wrapper
    {
     protected:
@@ -46,7 +47,7 @@ namespace SFMLBoost
         friend class ObjectsGroup;
     };
 
-    // todo:
+    // group of objects that have relative position and size
     class ObjectsGroup
     {
     private:

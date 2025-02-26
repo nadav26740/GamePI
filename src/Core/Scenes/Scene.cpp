@@ -5,10 +5,16 @@ Scene::Scene()
 
 }
 
-void Scene::Graphical_update()
+void Scene::Start(sf::RenderWindow *Scene_window)
+{
+    this->m_Scene_window = Scene_window;
+
+}
+
+void Scene::Render_objects()
 {
     for (auto obj_itr : Objects_groups)
     {
-        obj_itr.DrawGroup(*this->Scene_window);
+        obj_itr.DrawGroup(*this->m_Scene_window);
     }
 }

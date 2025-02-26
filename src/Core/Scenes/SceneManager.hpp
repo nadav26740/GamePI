@@ -1,4 +1,7 @@
 #pragma once
+#ifndef SCENEMANAGER_HPP
+#define SCENEMANAGER_HPP
+
 #include <iostream>
 #include <thread>
 #include <memory>
@@ -6,10 +9,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "Scene.hpp"
-#include "libs/Ticker_Interval/ticker.hpp"
+
+#include "libs/cpp-colors/colors.hpp"
 #include "libs/SFMLBoost.hpp"
 
-#define DEFAULT_RESOLUTION {600, 800}
+#include "SystemDefines.hpp"
 
 /// Singleton Scene manager
 /// @brief responsible to Load and control the scenes in runtime
@@ -25,8 +29,13 @@ private:
     SceneManager(/* args */);
     SceneManager(const SceneManager&) = delete;
     void operator=(const SceneManager&) = delete;
+    
+    /// @brief calling frame update on the scene
+    bool running;
+    void FrameLoaderThread();
 
 public:
+    ~SceneManager();
 
     /// @return Pointer to the current Scene
     Scene* GetCurrentScene();
@@ -40,3 +49,4 @@ public:
     /// @return the Intance of the current SceneManager
     static SceneManager* GetIntance();
 };
+#endif
