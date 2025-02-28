@@ -14,6 +14,8 @@
 #include "Core/AssetsCacheManager.hpp"
 #include "Core/ConfigLoader.hpp"
 
+#include "Scenes/SplashScreen.hpp"
+
 #define FRAME_LIMIT 30
 
 #define ICON_PATH "../assets/GamePIicon.png"
@@ -21,6 +23,24 @@
 
 #define GET_TIME std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now())
 
+#define DEMO_LVL_2
+
+#ifdef DEMO_LVL_2
+int main()
+{
+    std::cout << "================== RUNNING DEMO MAIN LVL2 ==================" << std::endl;
+    AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
+    SceneManager::GetIntance()->SetCurrentScene(new SplashScreen());
+    while (SceneManager::GetIntance()->GetCurrentWindow()->isOpen())
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+
+    return EXIT_SUCCESS;
+}
+#endif
+
+#ifdef DEMO_LVL_1
 int main()
 {
     std::cout << "================== RUNNING DEMO MAIN ==================" << std::endl;
@@ -141,3 +161,4 @@ int main()
 
     return EXIT_SUCCESS;
 }
+#endif

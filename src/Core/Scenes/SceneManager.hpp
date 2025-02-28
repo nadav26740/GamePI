@@ -21,24 +21,27 @@ class SceneManager
 {
 private:
     std::unique_ptr<Scene> m_Active_Scene;
-    std::unique_ptr<sf::RenderWindow> m_Active_window;
-
-    std::unique_ptr<std::thread> m_Scene_Thread;
+    std::shared_ptr<sf::RenderWindow> m_Active_window;
+    std::unique_ptr<sf::Thread> m_Scene_Thread;
 
     /* data */
     SceneManager(/* args */);
     SceneManager(const SceneManager&) = delete;
     void operator=(const SceneManager&) = delete;
     
+    void FrameLoaderThread();
+    
     /// @brief calling frame update on the scene
     bool running;
-    void FrameLoaderThread();
-
+    
 public:
+    
     ~SceneManager();
-
+    
     /// @return Pointer to the current Scene
     Scene* GetCurrentScene();
+    
+    /// @brief Frame loader thread running automaticly 
     
     /// @brief Getting scene pointer and Setting it as the active scene and running start function
     /// @param new_scene The scene to load (the pointer will be set into unique_ptr and will handle the delete memory)
@@ -48,5 +51,7 @@ public:
     /// @brief Too allow singleton we used this function to create single static object of this class
     /// @return the Intance of the current SceneManager
     static SceneManager* GetIntance();
+
+    sf::RenderWindow* GetCurrentWindow();
 };
 #endif

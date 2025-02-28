@@ -8,6 +8,9 @@ CODE_FILES=(
     "libs/SFMLBoost/ObjectsGroup.cpp"
     "Core/AssetsCacheManager.cpp"
     "Core/ConfigLoader.cpp"
+    "Core/Scenes/Scene.cpp"
+    "Core/Scenes/SceneManager.cpp"
+    "Scenes/SplashScreen.cpp" # need to fix
 )
 
 # To link an SFML library, you must add "-lsfml-{lib}"

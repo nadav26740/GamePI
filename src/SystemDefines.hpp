@@ -11,4 +11,4 @@
 #endif
 
 #define DEFAULT_RESOLUTION {600, 800}
-#define FRAMES_LIMIT 60
+#define FRAMES_LIMIT 30

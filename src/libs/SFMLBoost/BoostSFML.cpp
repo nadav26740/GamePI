@@ -1,13 +1,13 @@
 #include "BoostSFML.hpp"
 
-void SFMLBoost::CenterASprite(sf::Sprite *SpriteToCenter, sf::Window* Window_Referance)
+void SFMLBoost::CenterASprite(sf::Sprite *SpriteToCenter, const sf::Window* Window_Referance)
 {    
     sf::Vector2f OriginSprite_Original = SpriteToCenter->getOrigin();
     
     CenterATransformable(SpriteToCenter, Window_Referance, SpriteToCenter->getGlobalBounds(), SpriteToCenter->getOrigin());
 }
 
-void SFMLBoost::CenterATransformable(sf::Transformable *TransformableToCenter, sf::Window *window_referance, sf::FloatRect object_bounds, sf::Vector2f object_origin)
+void SFMLBoost::CenterATransformable(sf::Transformable *TransformableToCenter, const sf::Window *window_referance, sf::FloatRect object_bounds, sf::Vector2f object_origin)
 {
     sf::Vector2f WindowMiddle = {window_referance->getSize().x / 2.0f, window_referance->getSize().y / 2.0f};
 
