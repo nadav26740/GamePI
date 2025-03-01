@@ -137,21 +137,37 @@ public:
     
     // * Getters
 
-    /// @todo Get Soundbuffer pointer from the assets cache
     /// @brief Getting SoundBuffer from the mapped assets
     /// @param name of the soundbuffer to get
-    /// @return Soundbuffer or nullptr if soundbuffer not found
+    /// @return Soundbuffer pointer or nullptr if soundbuffer not found
     virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name = DEFAULT_SOUNDBUFFER_KEY) const;
+
+    /// @brief Getting SoundBuffer from the mapped assets
+    /// @param name of the soundbuffer to get
+    /// @return Soundbuffer const referance or nullptr if soundbuffer not found
+    virtual const sf::SoundBuffer& GetSoundBuffer_ref(const std::string &name = DEFAULT_SOUNDBUFFER_KEY) const;
+
     
     /// @brief Getting Texture from the mapped assets
     /// @param name Key name of the Texture
     /// @return Texture Pointer or nullptr if Texture not found
     virtual const sf::Texture* GetTexture(const std::string &name = DEFAULT_TEXTURE_KEY) const;
 
+    /// @brief Getting Texture from the mapped assets
+    /// @param name Key name of the Texture
+    /// @return Texture const referance or nullptr if Texture not found
+    virtual const sf::Texture& GetTexture_ref(const std::string &name = DEFAULT_TEXTURE_KEY) const;
+
+
     /// @brief Getting Font from the mapped assets
     /// @param name Key name of the Font
     /// @return Font Pointer or nullptr if Texture not found
     virtual const sf::Font* GetFont(const std::string &name = DEFAULT_FONT_KEY) const;
+
+    /// @brief Getting Font from the mapped assets
+    /// @param name Key name of the Font
+    /// @return Font referance or nullptr if Texture not found
+    virtual const sf::Font& GetFont_ref(const std::string &name = DEFAULT_FONT_KEY) const;
 
 
     /// @todo Implement a status 

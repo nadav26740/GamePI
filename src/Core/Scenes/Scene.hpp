@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "libs/SFMLBoost.hpp"
+#include "MacroFlags.hpp"
 
 // interface For scene class
 class Scene

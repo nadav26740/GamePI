@@ -15,7 +15,8 @@ void SceneManager::SetCurrentScene(Scene *new_scene)
     this->m_Active_Scene->Start(this->m_Active_window);
     
 #ifdef DEBUG
-    std::cout << "[DEBUG (SceneManager::SetCurrentScene)]Scene Loaded " << this->m_Active_Scene.get() << std::endl;
+    std::cout << cpp_colors::foreground::bright_blue << "[DEBUG (SceneManager::SetCurrentScene)]Scene Loaded " << this->m_Active_Scene.get()
+                << cpp_colors::style::reset << std::endl;
 #endif 
 
     if (this->m_Scene_Thread.get() == nullptr)
@@ -30,7 +31,8 @@ void SceneManager::SetCurrentScene(Scene *new_scene)
             this->FrameLoaderThread();
         });
      
-        std::cout << "Scene Thread Loaded " << this->m_Scene_Thread.get() << std::endl;
+        std::cout << cpp_colors::foreground::bright_blue << "[SceneManager::SetCurrentScene] Scene Thread Loaded " 
+                    << this->m_Scene_Thread.get() << cpp_colors::style::reset << std::endl;
         this->m_Scene_Thread->launch();
     }  
 
@@ -59,7 +61,7 @@ void SceneManager::FrameLoaderThread()
 {
     // interval - the minimum gap between each frame
     std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / FRAMES_LIMIT);
-    std::cout << "[SceneManager::FrameLoaderThread] " <<  "Frame Loader starting | Interval - " << interval.count() << std::endl;
+    cpp_colors::colorful_print("[SceneManager::FrameLoaderThread] Frame Loader starting | Interval - " + std::to_string(interval.count()), cpp_colors::foreground::bright_green);
     bool IsSceneLoaded = false;
 
     while (this->m_Active_window.get() != nullptr && 

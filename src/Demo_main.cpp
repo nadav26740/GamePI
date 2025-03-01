@@ -28,17 +28,29 @@
 #ifdef DEMO_LVL_2
 int main()
 {
-    std::cout << "================== RUNNING DEMO MAIN LVL2 ==================" << std::endl;
-    AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
-    std::cout << "[MAIN] Texture Loaded!" << std::endl;
-
-    SceneManager::GetIntance()->SetCurrentScene(new SplashScreen());
-    std::cout << "Scenes Running !" << std::endl;
-
-    //std::cout << std::_S_boolalpha << "Is Window Open: " << SceneManager::GetIntance()->GetCurrentWindow()->isOpen() << std::endl;
-    while (SceneManager::GetIntance()->GetCurrentWindow()->isOpen())
+    try 
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "================== RUNNING DEMO MAIN LVL2 ==================" << std::endl;
+        AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
+        std::cout << cpp_colors::foreground::bright_green << "[MAIN] Texture Loaded!" << cpp_colors::style::reset << std::endl;
+    
+        SceneManager::GetIntance()->SetCurrentScene(new SplashScreen());
+    
+        //std::cout << std::_S_boolalpha << "Is Window Open: " << SceneManager::GetIntance()->GetCurrentWindow()->isOpen() << std::endl;
+        while (SceneManager::GetIntance()->GetCurrentWindow()->isOpen())
+        {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+    }
+    catch (const std::exception& err)
+    {
+        std::cerr << "[MAIN ERROR CATCH] " << err.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+    catch (...)
+    {
+        std::cerr << "[MAIN ERROR CATCH] Unknown error" << std::endl;
+        return EXIT_FAILURE;
     }
 
     return EXIT_SUCCESS;

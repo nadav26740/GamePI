@@ -190,6 +190,11 @@ const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &nam
     return &(Sound_itr->second);
 }
 
+const sf::SoundBuffer &AssetsCacheManager::GetSoundBuffer_ref(const std::string &name) const
+{
+    return *(this->GetSoundBuffer(name));
+}
+
 const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)const
 {
 #ifdef DEBUG
@@ -218,6 +223,11 @@ const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)const
     }
 
     return &(Texture_itr->second);
+}
+
+const sf::Texture &AssetsCacheManager::GetTexture_ref(const std::string &name) const
+{
+    return *(this->GetTexture(name));
 }
 
 bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesystem::path &path)
@@ -349,6 +359,11 @@ const sf::Font *AssetsCacheManager::GetFont(const std::string &name) const
     }
 
     return &(Font_itr->second);
+}
+
+const sf::Font &AssetsCacheManager::GetFont_ref(const std::string &name) const
+{
+    return *(this->GetFont(name));
 }
 
 AssetsCacheStatus AssetsCacheManager::GetStatus() const

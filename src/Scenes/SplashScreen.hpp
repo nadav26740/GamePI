@@ -3,6 +3,7 @@
 #define SCENES_SPLASHSCREEN_HPP
 
 #define LOGO_ASSET_NAME "GamePI_Icon"
+#define SPLASH_SCREEN_TEXT "Welocme to GamePI"
 
 #include <iostream>
 #include <memory>
