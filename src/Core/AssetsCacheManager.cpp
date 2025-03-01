@@ -160,7 +160,7 @@ bool AssetsCacheManager::LoadTheme(std::filesystem::path dir_path)
     return true;
 }
 
-const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name)
+const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &name) const
 {
 #ifdef DEBUG
     std::cout << "[DEBUG (Assets Cache Manager)] Trying to get SoundBuffer: " << name << std::endl;
@@ -190,7 +190,7 @@ const sf::SoundBuffer *AssetsCacheManager::GetSoundBuffer(const std::string &nam
     return &(Sound_itr->second);
 }
 
-const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)
+const sf::Texture *AssetsCacheManager::GetTexture(const std::string &name)const
 {
 #ifdef DEBUG
     std::cout << "[DEBUG (Assets Cache Manager)] Trying to get Texture: " << name << std::endl;
@@ -242,7 +242,7 @@ bool AssetsCacheManager::LoadTexture(const std::string &name, const std::filesys
     std::cout << "[Assets Cache Manager] Loading: " << name << ": " << path << std::endl;
 
     // Checking if default error texture
-    if (name == "Error_texture")
+    if (name == DEFAULT_TEXTURE_KEY)
     {
         this->Error_texture = &this->m_Texture_map[path];
         cpp_colors::colorful_print("[AssetsCacheManager] Error Texture Loaded", cpp_colors::foreground::bright_green, std::cout);
@@ -275,7 +275,7 @@ bool AssetsCacheManager::LoadSoundBuffer(const std::string &name, const std::fil
     this->m_SoundBuffer_keys_map[name] = path;
 
     // Checking if default error texture
-    if (name == "Error_Sound")
+    if (name == DEFAULT_SOUNDBUFFER_KEY)
     {
         this->Error_SoundBuffer = &this->m_SoundBuffer_map[path];
         cpp_colors::colorful_print("[AssetsCacheManager] Default SoundBuffer Loaded", cpp_colors::foreground::bright_green, std::cout);
@@ -308,7 +308,7 @@ bool AssetsCacheManager::LoadFont(const std::string &name, const std::filesystem
     this->m_Fonts_keys_map[name] = path;
 
     // Checking if default error texture
-    if (name == "Default_Font")
+    if (name == DEFAULT_FONT_KEY)
     {
         this->Default_Font = &this->m_Fonts_map[path];
         cpp_colors::colorful_print("[AssetsCacheManager] Default Font Loaded", cpp_colors::foreground::bright_green, std::cout);
@@ -321,7 +321,7 @@ bool AssetsCacheManager::LoadFont(const std::string &name, const std::filesystem
     return true;
 }
 
-const sf::Font *AssetsCacheManager::GetFont(const std::string &name)
+const sf::Font *AssetsCacheManager::GetFont(const std::string &name) const
 {
     #ifdef DEBUG
     std::cout << "[DEBUG (Assets Cache Manager)] Trying to get Font: " << name << std::endl;
@@ -351,7 +351,7 @@ const sf::Font *AssetsCacheManager::GetFont(const std::string &name)
     return &(Font_itr->second);
 }
 
-AssetsCacheStatus AssetsCacheManager::GetStatus()
+AssetsCacheStatus AssetsCacheManager::GetStatus() const
 {
     std::cout << "AssetsCacheManager::GetStatus [WIP]" << std::endl;
     AssetsCacheStatus status;

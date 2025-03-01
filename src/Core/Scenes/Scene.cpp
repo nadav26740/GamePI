@@ -2,7 +2,12 @@
 
 Scene::Scene()
 {
+    std::cout << "[Scene::Constructor]" << "Scene Created: " << this << std::endl;
+}
 
+Scene::~Scene()
+{
+    std::cout << "[Scene::Destructor]" << "Scene destroyed: " << this << std::endl;
 }
 
 void Scene::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
@@ -25,6 +30,8 @@ void Scene::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 
 void Scene::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
+    Scene_window->clear(m_Background_Color);
+
     for (auto obj_itr : Objects_groups)
     {
         obj_itr.DrawGroup(*Scene_window);
@@ -34,8 +41,6 @@ void Scene::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
     {
         Scene_window->draw(*drawable);
     }
-
-    Scene_window->display();
 }
 
 std::vector<SFMLBoost::ObjectsGroup> *Scene::GetObjectsGroups()

@@ -7,24 +7,34 @@ Scene *SceneManager::GetCurrentScene()
 
 void SceneManager::SetCurrentScene(Scene *new_scene)
 {
+    // Lock guard to make sure the scene loader won't run while changing
+    std::lock_guard<std::mutex> scene_guard(m_scene_mutex);
+
+    // Setting the new scene
     this->m_Active_Scene = std::unique_ptr<Scene>(std::move(new_scene));
     this->m_Active_Scene->Start(this->m_Active_window);
+    
+#ifdef DEBUG
+    std::cout << "[DEBUG (SceneManager::SetCurrentScene)]Scene Loaded " << this->m_Active_Scene.get() << std::endl;
+#endif 
 
     if (this->m_Scene_Thread.get() == nullptr)
     {
+        // Transfering the window ownership to the frameloader
         this->m_Active_window->setActive(false);
 
         this->m_Scene_Thread = std::make_unique<sf::Thread>([this] 
         {
+            this->m_Active_window->setActive(true);
+
             this->FrameLoaderThread();
         });
      
+        std::cout << "Scene Thread Loaded " << this->m_Scene_Thread.get() << std::endl;
         this->m_Scene_Thread->launch();
     }  
 
-    // m_Active_window->clear(sf::Color(29, 180, 237));
-    
-    std::cout << "Scene Loaded addr: " << this->m_Active_Scene.get() << std::endl;
+    // m_Active_window->clear(sf::Color(29, 180, 237));    
 }
 
 SceneManager *SceneManager::GetIntance()
@@ -41,51 +51,52 @@ sf::RenderWindow* SceneManager::GetCurrentWindow()
 SceneManager::SceneManager()
 {
     this->m_Active_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_RESOLUTION), "GamePI Window", sf::Style::Fullscreen);
-    // this->m_Active_window->clear(sf::Color::Cyan);
-    // limiting the frames by calculating the minimum gap between frames in miliseconds
     running = true;
 }
 
 
 void SceneManager::FrameLoaderThread()
 {
-    this->m_Active_window->setActive(true);
-
+    // interval - the minimum gap between each frame
     std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / FRAMES_LIMIT);
     std::cout << "[SceneManager::FrameLoaderThread] " <<  "Frame Loader starting | Interval - " << interval.count() << std::endl;
     bool IsSceneLoaded = false;
 
-    while (this->m_Active_window->isOpen() && running)
+    while (this->m_Active_window.get() != nullptr && 
+            this->m_Active_window->isOpen() && running)
     {
+        // Locking the mutex of the scene 
+        this->m_scene_mutex.lock();
+        
+        // calculating the next frame time point
         std::chrono::steady_clock::time_point next_t_point = interval + std::chrono::steady_clock::now();
-        // std::cout << "[SceneManager::FrameLoaderThread] Timestamp (" << std::chrono::steady_clock::now().time_since_epoch().count() << ")" << std::endl;
+
         IsSceneLoaded = this->m_Active_Scene.get() != nullptr;
         
+        // // Checking if scene loaded
         if (!IsSceneLoaded)
         {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
             cpp_colors::colorful_print("[ERROR (SceneManager::FrameLoaderThread)] Missing Scene!", cpp_colors::foreground::bright_red, std::cerr);
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             continue;
         }
 
-        if (this->m_Active_window.get() == nullptr)
-        {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            cpp_colors::colorful_print("[ERROR (SceneManager::FrameLoaderThread)] Window isn't loaded!", cpp_colors::foreground::bright_red, std::cerr);
-            continue;
-        }
     
         // calling logical update
         this->m_Active_Scene->Frame_update();
         
         // calling graphical update 
         this->m_Active_Scene->Graphical_update();
-    
-        // calling rendering function to the window
-        // this->m_Active_window->clear(sf::Color::Red);
-        // this->m_Active_window->display();
-        this->m_Active_Scene->Render_objects(this->m_Active_window);
 
+        // Rendering the frame
+        // ! takes most resources
+        this->m_Active_Scene->Render_objects(this->m_Active_window);
+    
+        // Display the new frame
+        this->m_Active_window->display();
+
+        // * unlocking the mutex
+        this->m_scene_mutex.unlock();
 
         // std::cout << "Full Rush" << std::endl;
         std::this_thread::sleep_until(next_t_point);

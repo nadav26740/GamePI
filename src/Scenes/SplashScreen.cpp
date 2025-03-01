@@ -18,6 +18,11 @@ void SplashScreen::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     
     // this->m_Logo_group.Objects_in_group.emplace_back(this->m_logo_sprite_wrapper);
     this->Objects_groups.push_back(this->m_Logo_group);
+    std::thread([]{
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::cout << "Changing scene!" << std::endl;
+        SceneManager::GetIntance()->SetCurrentScene(new MainMenu());
+    }).detach();
 }
 
 void SplashScreen::Frame_update()
@@ -31,7 +36,6 @@ void SplashScreen::Graphical_update()
 void SplashScreen::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
     // std::cout << "Running! " << std::endl;
-    Scene_window->clear(sf::Color(29, 180, 237));
     
     // ! TODO: Fix Bug unable to access the scene_window!
     Scene::Render_objects(Scene_window);

@@ -21,6 +21,10 @@
 #define ASSETS_CONFIG_FILE_NAME "Theme.json"
 #define CONFIG_FOLDER_NAME "Assets"
 
+#define DEFAULT_TEXTURE_KEY "Error_texture"
+#define DEFAULT_SOUNDBUFFER_KEY "Error_Sound"
+#define DEFAULT_FONT_KEY "Default_Font"
+
 // * TODO: #define DEFAULT_ASSETS_JSON_PATH "TODO"
 
 // TODO: Add a default texture and sound in case missing asset
@@ -137,20 +141,20 @@ public:
     /// @brief Getting SoundBuffer from the mapped assets
     /// @param name of the soundbuffer to get
     /// @return Soundbuffer or nullptr if soundbuffer not found
-    virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name);
+    virtual const sf::SoundBuffer* GetSoundBuffer(const std::string &name = DEFAULT_SOUNDBUFFER_KEY) const;
     
     /// @brief Getting Texture from the mapped assets
     /// @param name Key name of the Texture
     /// @return Texture Pointer or nullptr if Texture not found
-    virtual const sf::Texture* GetTexture(const std::string &name);
+    virtual const sf::Texture* GetTexture(const std::string &name = DEFAULT_TEXTURE_KEY) const;
 
     /// @brief Getting Font from the mapped assets
     /// @param name Key name of the Font
     /// @return Font Pointer or nullptr if Texture not found
-    virtual const sf::Font* GetFont(const std::string &name);
+    virtual const sf::Font* GetFont(const std::string &name = DEFAULT_FONT_KEY) const;
 
 
     /// @todo Implement a status 
-    virtual AssetsCacheStatus GetStatus();
+    virtual AssetsCacheStatus GetStatus() const;
 };
 #endif

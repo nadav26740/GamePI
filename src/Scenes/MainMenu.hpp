@@ -1,22 +1,20 @@
 #pragma once
-#ifndef SCENES_SPLASHSCREEN_HPP
-#define SCENES_SPLASHSCREEN_HPP
-
-#define LOGO_ASSET_NAME "GamePI_Icon"
+#ifndef SCENES_MAINMENU_HPP
+#define SCENES_MAINMENU_HPP
 
 #include <iostream>
 #include <memory>
 #include <string>
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 #include "Core/Scenes/SceneManager.hpp"
+
 #include "Core/Scenes/Scene.hpp"
 #include "Core/AssetsCacheManager.hpp"
-#include "Scenes/MainMenu.hpp"
 
 /// @brief 
 /// Fix undefined reference
-class SplashScreen : public Scene
+class MainMenu : public Scene
 {
 protected:
     /* data */
@@ -26,6 +24,7 @@ protected:
     std::shared_ptr<sf::Sprite> m_logo_sprite;
     
     std::shared_ptr<sf::Text> m_logo_text;
+    sf::Text m_fps_text;
 
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
