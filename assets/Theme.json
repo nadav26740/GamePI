@@ -13,6 +13,10 @@
         {
             "name": "GamePI_Icon",
             "path": "Textures/GamePIicon.png"
+        },
+        {
+            "name": "Cartridge",
+            "path": "Textures/GameBoyCartridge.png"
         }
     ],
 
