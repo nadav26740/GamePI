@@ -30,7 +30,7 @@ public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
 
     /// @brief Runs every frame responsible for the logical part of the frame
-    virtual void Frame_update();
+    virtual void Frame_update(std::queue<sf::Event> events_queue);
 
     /// @brief Runs every frame responsible for the graphical part of the frame
     virtual void Graphical_update();

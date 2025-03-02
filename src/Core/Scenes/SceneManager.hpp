@@ -6,6 +6,7 @@
 #include <thread>
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 

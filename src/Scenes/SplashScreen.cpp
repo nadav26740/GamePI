@@ -50,7 +50,7 @@ void SplashScreen::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     }).detach();
 }
 
-void SplashScreen::Frame_update()
+void SplashScreen::Frame_update(std::queue<sf::Event> events_queue)
 {
 }
 

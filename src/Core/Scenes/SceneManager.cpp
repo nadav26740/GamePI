@@ -52,7 +52,7 @@ sf::RenderWindow* SceneManager::GetCurrentWindow()
 
 SceneManager::SceneManager()
 {
-    this->m_Active_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_RESOLUTION), "GamePI Window", sf::Style::Fullscreen);
+    this->m_Active_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_RESOLUTION), "GamePI Window", sf::Style::Close);
     running = true;
 }
 
@@ -63,19 +63,32 @@ void SceneManager::FrameLoaderThread()
     std::chrono::milliseconds interval = std::chrono::milliseconds(1000 / FRAMES_LIMIT);
     cpp_colors::colorful_print("[SceneManager::FrameLoaderThread] Frame Loader starting | Interval - " + std::to_string(interval.count()), cpp_colors::foreground::bright_green);
     bool IsSceneLoaded = false;
+    sf::Event event;
+    std::queue<sf::Event> events_queue;
 
     while (this->m_Active_window.get() != nullptr && 
             this->m_Active_window->isOpen() && running)
     {
         // Locking the mutex of the scene 
         this->m_scene_mutex.lock();
+        events_queue =  std::queue<sf::Event>();
         
         // calculating the next frame time point
         std::chrono::steady_clock::time_point next_t_point = interval + std::chrono::steady_clock::now();
 
         IsSceneLoaded = this->m_Active_Scene.get() != nullptr;
         
-        // // Checking if scene loaded
+        while (this->m_Active_window->pollEvent(event)) 
+        {
+            if (event.type == sf::Event::KeyPressed)
+                events_queue.push(event);
+
+            if (event.type == sf::Event::Closed)
+                this->m_Active_window->close();
+        }
+
+
+        // Checking if scene loaded
         if (!IsSceneLoaded)
         {
             cpp_colors::colorful_print("[ERROR (SceneManager::FrameLoaderThread)] Missing Scene!", cpp_colors::foreground::bright_red, std::cerr);
@@ -85,7 +98,7 @@ void SceneManager::FrameLoaderThread()
 
     
         // calling logical update
-        this->m_Active_Scene->Frame_update();
+        this->m_Active_Scene->Frame_update(events_queue);
         
         // calling graphical update 
         this->m_Active_Scene->Graphical_update();

@@ -7,7 +7,7 @@ void MainMenu::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     
     // Setting text font and string
     this->m_logo_text->setFont(*(AssetsCacheManager::GetIntance()->GetFont()));
-    this->m_logo_text->setString("Main Menu Running");
+    this->m_logo_text->setString("Press any key to start!");
 
     m_fps_text.setFont(*(AssetsCacheManager::GetIntance()->GetFont()));
     m_fps_text.setColor(sf::Color::Black);
@@ -19,7 +19,7 @@ void MainMenu::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 
 }
 
-void MainMenu::Frame_update()
+void MainMenu::Frame_update(std::queue<sf::Event> events_queue)
 {
     static std::chrono::steady_clock::time_point last_epoch;
     int frame_Rate = 1000 / (std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()).time_since_epoch().count() - 
