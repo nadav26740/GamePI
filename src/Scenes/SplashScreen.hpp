@@ -28,6 +28,9 @@ protected:
     
     std::shared_ptr<sf::Text> m_logo_text;
 
+    std::unique_ptr<sf::RectangleShape> m_black_rect;
+    std::chrono::steady_clock::time_point m_scene_start_point;
+
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
 

@@ -43,11 +43,34 @@ void SplashScreen::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     std::cout << "[DEBUG (SplashScreen::Start)] Logo text added to render list: " << this->m_logo_text.get() << std::endl; 
 #endif
 
+    // Creating black screen op
+    this->m_black_rect = std::make_unique<sf::RectangleShape>();
+    this->m_black_rect->setFillColor(sf::Color(1u,1u,1u,255u));
+    this->m_black_rect->setSize({(float)Scene_window->getSize().x, (float)Scene_window->getSize().y});
+    this->m_drawables_objects.push_back(this->m_black_rect.get());
+
+    this->m_scene_start_point = std::chrono::steady_clock::now() + std::chrono::seconds(3);
+
     // Changing scene after 3 seconds delay
     std::thread([]{
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::seconds(8));
         SceneManager::GetIntance()->SetCurrentScene(new MainMenu());
     }).detach();
+
+    this->animations.emplace_back([this]()
+    {
+        float alpha = 255 / 3000.0;
+        alpha *= (std::chrono::duration_cast<std::chrono::milliseconds>(this->m_scene_start_point - std::chrono::steady_clock::now())).count();
+        if (alpha <= 0)
+        {
+            this->m_black_rect->setFillColor(sf::Color(0u,0u,0u,0u));
+            return true;
+        }
+
+
+        this->m_black_rect->setFillColor(sf::Color(0u,0u,0u,(sf::Uint8)alpha));
+        return false;
+    });
 }
 
 void SplashScreen::Frame_update(std::queue<sf::Event> events_queue)
@@ -56,6 +79,7 @@ void SplashScreen::Frame_update(std::queue<sf::Event> events_queue)
 
 void SplashScreen::Graphical_update()
 {
+    Scene::Graphical_update();
 }
 
 void SplashScreen::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
