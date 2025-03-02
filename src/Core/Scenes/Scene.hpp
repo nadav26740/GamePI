@@ -19,6 +19,9 @@ protected:
     std::vector<SFMLBoost::ObjectsGroup> Objects_groups;
     sf::Color m_Background_Color = sf::Color(29, 180, 237);
     
+    // Return true if it is last iteration
+    // if true has been returned removing it from the vector
+    std::vector<std::function<bool()>> animations;
 public:
     Scene();
     ~Scene();
@@ -30,7 +33,8 @@ public:
     virtual void Frame_update(std::queue<sf::Event> events_queue) = 0;
 
     /// @brief Runs every frame responsible for the graphical part of the frame
-    virtual void Graphical_update() = 0;
+    /// @note Also runs the animations
+    virtual void Graphical_update();
     
     /// @brief Runs every frame responsible to render the object into the screen
     /// @attention Also clearing the window

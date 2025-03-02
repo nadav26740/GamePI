@@ -27,6 +27,21 @@ void Scene::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 // {
 // }
 
+void Scene::Graphical_update()
+{
+    auto itr = this->animations.begin();
+    while (itr != animations.end())
+    {
+        if ((*itr)())
+        {
+            animations.erase(itr);
+        }
+        else
+        {
+            itr++;
+        }
+    }
+}
 
 void Scene::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
