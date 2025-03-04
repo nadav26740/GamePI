@@ -27,9 +27,11 @@ public:
     ~Scene();
 
     /// @brief Runs when scene loaded 
+    /// @param Scene_window the main window for rendering
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
 
     /// @brief Runs every frame responsible for the logical part of the frame
+    /// @param events_queue queue contains the inputs between frames
     virtual void Frame_update(std::queue<sf::Event> events_queue) = 0;
 
     /// @brief Runs every frame responsible for the graphical part of the frame
@@ -38,6 +40,7 @@ public:
     
     /// @brief Runs every frame responsible to render the object into the screen
     /// @attention Also clearing the window
+    /// @param Scene_window the main window for rendering
     virtual void Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window);
 
     std::vector<SFMLBoost::ObjectsGroup> *GetObjectsGroups();

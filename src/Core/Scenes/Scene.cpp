@@ -57,9 +57,3 @@ void Scene::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
         Scene_window->draw(*drawable);
     }
 }
-
-std::vector<SFMLBoost::ObjectsGroup> *Scene::GetObjectsGroups()
-{
-    return &(this->Objects_groups);
-}
-
