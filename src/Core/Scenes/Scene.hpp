@@ -42,7 +42,5 @@ public:
     /// @attention Also clearing the window
     /// @param Scene_window the main window for rendering
     virtual void Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window);
-
-    std::vector<SFMLBoost::ObjectsGroup> *GetObjectsGroups();
 };
 #endif

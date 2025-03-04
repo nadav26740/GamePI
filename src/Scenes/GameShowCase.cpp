@@ -18,7 +18,15 @@ void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     this->m_button_text.move({0, 50});
     
     this->m_drawables_objects.push_back(&m_button_text);
+    // TODO Add load all the games 
 
+    // Setting the cover image
+    this->m_img_showcase.setTexture(AssetsCacheManager::GetIntance()->GetTexture_ref("Cartridge"));
+    sf::FloatRect size_vec = this->m_img_showcase.getGlobalBounds();
+    this->m_img_showcase.setScale( { this->cm_cover_width / size_vec.width, this->cm_cover_height / size_vec.height } );\
+    SFMLBoost::CenterASprite(&(this->m_img_showcase), Scene_window.get());
+    this->m_img_showcase.move({0, -100});
+    this->m_drawables_objects.push_back(&m_img_showcase);
 }
 
 void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)

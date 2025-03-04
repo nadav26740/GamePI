@@ -11,7 +11,6 @@
 
 #include "SystemDefines.hpp"
 
-
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/Scenes/Scene.hpp"
 #include "Core/AssetsCacheManager.hpp"

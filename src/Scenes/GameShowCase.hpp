@@ -16,6 +16,11 @@ private:
 
     sf::Sprite m_img_showcase;
 
+    const float cm_cover_height = 200;
+    const float cm_cover_width = 200;
+
+    // TODO: change current game shown 
+
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
 
@@ -26,6 +31,7 @@ public:
     virtual void Graphical_update();
 
     virtual void Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window);
+    
     
 };
 
