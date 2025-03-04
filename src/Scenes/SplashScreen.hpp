@@ -2,13 +2,15 @@
 #ifndef SCENES_SPLASHSCREEN_HPP
 #define SCENES_SPLASHSCREEN_HPP
 
-#define LOGO_ASSET_NAME "GamePI_Icon"
 #define SPLASH_SCREEN_TEXT "Welocme to GamePI"
 
 #include <iostream>
 #include <memory>
 #include <string>
 #include "SFML/Graphics.hpp"
+
+#include "SystemDefines.hpp"
+
 
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/Scenes/Scene.hpp"

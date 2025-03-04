@@ -12,3 +12,5 @@
 
 #define DEFAULT_RESOLUTION {600, 800}
 #define FRAMES_LIMIT 30
+
+#define LOGO_ASSET_NAME "GamePI_Icon"

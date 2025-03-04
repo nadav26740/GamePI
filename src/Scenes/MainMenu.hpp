@@ -2,6 +2,8 @@
 #ifndef SCENES_MAINMENU_HPP
 #define SCENES_MAINMENU_HPP
 
+#define LOGO_ASSET_NAME "GamePI_Icon"
+
 #include <iostream>
 #include <memory>
 #include <string>

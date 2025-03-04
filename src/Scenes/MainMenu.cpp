@@ -8,12 +8,23 @@ void MainMenu::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     // Setting text font and string
     this->m_logo_text->setFont(*(AssetsCacheManager::GetIntance()->GetFont()));
     this->m_logo_text->setString("Press any key to start!");
+    this->m_logo_text->setCharacterSize(24);
 
+    // Settign text location
+    SFMLBoost::CenterATransformable(this->m_logo_text.get(), Scene_window.get(), this->m_logo_text->getLocalBounds());
+    this->m_logo_text->move({0, 155});
+
+    // Creating logo img
+    this->m_logo_sprite = std::make_shared<sf::Sprite>(*(AssetsCacheManager::GetIntance()->GetTexture(LOGO_ASSET_NAME)));
+    this->m_logo_sprite->scale({3.5, 3.5});
+    SFMLBoost::CenterASprite(this->m_logo_sprite.get(), Scene_window.get());
+
+    // Add FPS counter
     m_fps_text.setFont(*(AssetsCacheManager::GetIntance()->GetFont()));
     m_fps_text.setColor(sf::Color::Black);
-
-    SFMLBoost::CenterATransformable(this->m_logo_text.get(), Scene_window.get(), this->m_logo_text->getLocalBounds());
-
+    
+    
+    this->m_drawables_objects.push_back(this->m_logo_sprite.get());
     this->m_drawables_objects.push_back(this->m_logo_text.get());
     this->m_drawables_objects.push_back(&m_fps_text);
 
