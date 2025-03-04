@@ -27,6 +27,18 @@ void MainMenu::Frame_update(std::queue<sf::Event> events_queue)
 
     last_epoch = std::chrono::steady_clock::now();
     m_fps_text.setString("Fps: " + std::to_string(frame_Rate));
+
+    while (!events_queue.empty())
+    {
+        if (events_queue.back().type == sf::Event::EventType::KeyPressed)
+        {
+            std::thread([this]
+            {
+                SceneManager::GetIntance()->SetCurrentScene(new GameShowCase());
+            }).detach();
+        }
+        events_queue.pop();
+    }
 }
 
 

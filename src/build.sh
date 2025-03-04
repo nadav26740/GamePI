@@ -12,6 +12,7 @@ CODE_FILES=(
     "Core/Scenes/SceneManager.cpp"
     "Scenes/SplashScreen.cpp" # need to fix
     "Scenes/MainMenu.cpp"
+    "Scenes/GameShowCase.cpp"
 )
 
 # To link an SFML library, you must add "-lsfml-{lib}"

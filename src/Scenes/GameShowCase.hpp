@@ -1,30 +1,20 @@
 #pragma once
-#ifndef SCENES_MAINMENU_HPP
-#define SCENES_MAINMENU_HPP
+#ifndef GAMESHOWCASE_HPP
+#define GAMESHOWCASE_HPP
 
 #include <iostream>
-#include <memory>
-#include <string>
-#include <SFML/Graphics.hpp>
-
-#include "Core/Scenes/SceneManager.hpp"
-
 #include "Core/Scenes/Scene.hpp"
+#include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
-#include "Scenes/GameShowCase.hpp"
 
-/// @brief that's a stupid fucking scene that just saying press any button
-class MainMenu : public Scene
+class GameShowCase : public Scene
 {
-protected:
+private:
     /* data */
-    SFMLBoost::ObjectsGroup m_Logo_group;
+    sf::Text m_button_text;
+    sf::RectangleShape m_button_background;
 
-    std::shared_ptr<SFMLBoost::Object_wrapper> m_logo_sprite_wrapper;
-    std::shared_ptr<sf::Sprite> m_logo_sprite;
-    
-    std::shared_ptr<sf::Text> m_logo_text;
-    sf::Text m_fps_text;
+    sf::Sprite m_img_showcase;
 
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);
@@ -38,4 +28,5 @@ public:
     virtual void Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window);
     
 };
+
 #endif
