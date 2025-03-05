@@ -15,7 +15,7 @@ void SplashScreen::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 
     this->m_drawables_objects.push_back(this->m_logo_sprite.get());
     
-    this->Objects_groups.push_back(this->m_Logo_group);
+    this->Objects_groups.push_back(&(this->m_Logo_group));
 
 #ifdef DEBUG
     std::cout << "[DEBUG (SplashScreen::Start)] Logo added to render list: " << this->m_logo_sprite.get() << std::endl; 

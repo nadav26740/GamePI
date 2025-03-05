@@ -76,6 +76,10 @@ namespace SFMLBoost
         /// @brief sets the position based on the window position
         /// @param the position of the group to the window 
         void SetPosition(sf::Vector2f);
+
+        /// @brief move the position of the group by vector2f points 
+        /// @param how much points to change position
+        void move(sf::Vector2f);
         
         /// @brief sets the origin position of the group
         /// @param The New origin

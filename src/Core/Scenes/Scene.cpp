@@ -49,7 +49,7 @@ void Scene::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
 
     for (auto obj_itr : Objects_groups)
     {
-        obj_itr.DrawGroup(*Scene_window);
+        obj_itr->DrawGroup(*Scene_window);
     }
 
     for (auto drawable : m_drawables_objects)

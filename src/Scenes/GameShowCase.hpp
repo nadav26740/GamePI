@@ -3,7 +3,9 @@
 #define GAMESHOWCASE_HPP
 
 #include <iostream>
+#include <memory>
 #include "Core/Scenes/Scene.hpp"
+#include "libs/SFMLBoost.hpp"
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
 
@@ -11,10 +13,14 @@ class GameShowCase : public Scene
 {
 private:
     /* data */
-    sf::Text m_button_text;
-    sf::RectangleShape m_button_background;
+    std::shared_ptr<sf::Text> m_button_text; 
+    std::shared_ptr<sf::RectangleShape> m_button_background;
+    SFMLBoost::ObjectsGroup m_button_group;
 
     sf::Sprite m_img_showcase;
+    sf::Texture m_showcase_texture;
+    std::shared_ptr<sf::Text> m_Game_name_text;
+    std::string m_Game_name;
 
     const float cm_cover_height = 200;
     const float cm_cover_width = 200;

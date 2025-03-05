@@ -16,7 +16,7 @@ class Scene
 protected:
     /* data */
     std::vector<sf::Drawable*> m_drawables_objects;
-    std::vector<SFMLBoost::ObjectsGroup> Objects_groups;
+    std::vector<SFMLBoost::ObjectsGroup*> Objects_groups;
     sf::Color m_Background_Color = sf::Color(29, 180, 237);
     
     // Return true if it is last iteration

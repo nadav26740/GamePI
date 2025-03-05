@@ -50,6 +50,12 @@ namespace SFMLBoost
         this->Position = val;
     }
 
+    void ObjectsGroup::move(sf::Vector2f val)
+    {
+        this->Position.x += val.x;
+        this->Position.y += val.y;
+    }
+
     void ObjectsGroup::SetOrigin(sf::Vector2f val)
     {
         this->OriginPosition = val;
