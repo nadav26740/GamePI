@@ -2,12 +2,12 @@
 
 Scene::Scene()
 {
-    std::cout << "[Scene::Constructor]" << "Scene Created: " << this << std::endl;
+    std::cout << cpp_colors::foreground::bright_green << "[Scene::Constructor] " << "Scene Created: " << this << cpp_colors::style::reset << std::endl;
 }
 
 Scene::~Scene()
 {
-    std::cout << "[Scene::Destructor]" << "Scene destroyed: " << this << std::endl;
+    std::cout << cpp_colors::foreground::bright_magenta << "[Scene::Destructor] " << "Scene destroyed: " << this << cpp_colors::style::reset << std::endl;
 }
 
 void Scene::Start(std::shared_ptr<sf::RenderWindow> Scene_window)

@@ -117,7 +117,8 @@ void SceneManager::FrameLoaderThread()
         // std::cout << "Full Rush" << std::endl;
         std::this_thread::sleep_until(next_t_point);
     }
-    
+
+    cpp_colors::colorful_print("Render Thread has finished!", cpp_colors::foreground::bright_magenta);
 }
 
 SceneManager::~SceneManager()

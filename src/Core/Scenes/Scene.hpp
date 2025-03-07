@@ -7,6 +7,7 @@
 #include <queue>
 #include <SFML/Graphics.hpp>
 
+#include "libs/cpp-colors/colors.hpp"
 #include "libs/SFMLBoost.hpp"
 #include "MacroFlags.hpp"
 
