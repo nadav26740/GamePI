@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <regex>
 
 // third party libs
 #include "libs/nlohmann/json.hpp"

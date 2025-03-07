@@ -105,6 +105,11 @@ bool ConfigLoader::LoadConfig(const std::filesystem::path &config_path, bool Set
     this->JsonIntoField(js, m_Emulator_Flags, KEY_EMULATOR_FLAGS);
     this->JsonIntoField(js, m_Theme_path, KEY_THEME_PATH);
 
+    // ! Changing ~ in paths to Home path
+    m_Default_assets_path = std::regex_replace(m_Default_assets_path.string(), std::regex("~"), HOME_PATH + "/");
+    m_games_directory = std::regex_replace(m_games_directory.string(), std::regex("~"), HOME_PATH + "/");
+    m_Theme_path = std::regex_replace(m_Theme_path.string(), std::regex("~"), HOME_PATH + "/");
+
 #ifdef DEBUG
     std::cout << "[DEBUG (ConfigLoader::LoadConfig)] Loaded Config" << js << std::endl;
 #endif
