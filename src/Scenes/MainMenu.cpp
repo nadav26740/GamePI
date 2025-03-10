@@ -53,7 +53,7 @@ void MainMenu::Frame_update(std::queue<sf::Event> events_queue)
 }
 
 
-void MainMenu::Graphical_update()
+void MainMenu::Graphical_update(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
 }
 

@@ -102,7 +102,7 @@ void SceneManager::FrameLoaderThread()
         this->m_Active_Scene->Frame_update(input_system_queue);
         
         // calling graphical update 
-        this->m_Active_Scene->Graphical_update();
+        this->m_Active_Scene->Graphical_update(this->m_Active_window);
 
         // Rendering the frame
         // ! takes most resources
@@ -118,7 +118,7 @@ void SceneManager::FrameLoaderThread()
         std::this_thread::sleep_until(next_t_point);
     }
 
-    cpp_colors::colorful_print("Render Thread has finished!", cpp_colors::foreground::bright_magenta);
+    cpp_colors::colorful_print("Render Thread has been finished!", cpp_colors::foreground::bright_magenta);
 }
 
 SceneManager::~SceneManager()

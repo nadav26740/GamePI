@@ -77,9 +77,9 @@ void SplashScreen::Frame_update(std::queue<sf::Event> events_queue)
 {
 }
 
-void SplashScreen::Graphical_update()
+void SplashScreen::Graphical_update(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
-    Scene::Graphical_update();
+    Scene::Graphical_update(Scene_window);
 }
 
 void SplashScreen::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)

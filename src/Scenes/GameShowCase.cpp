@@ -2,7 +2,6 @@
 
 void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
-
     // * Creating Button Background color
     this->m_button_background = std::make_shared<sf::RectangleShape>();
     this->m_button_background->setSize({140, 50});
@@ -53,12 +52,22 @@ void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 
 void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)
 {
+    // switch (rand() % 3)
+    // {
+    // case 0:
+    //     SFMLBoost::SetTransformablePosition(&(this->m_img_showcase), )
+    //     /* code */
+    //     break;
+    
+    // default:
+    //     break;
+    // }
 }
 
-void GameShowCase::Graphical_update()
+void GameShowCase::Graphical_update(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
     
-    Scene::Graphical_update();
+    Scene::Graphical_update(Scene_window);
 }
 
 void GameShowCase::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window)
