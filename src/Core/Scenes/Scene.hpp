@@ -20,6 +20,8 @@ protected:
     std::vector<SFMLBoost::ObjectsGroup*> Objects_groups;
     sf::Color m_Background_Color = sf::Color(29, 180, 237);
     
+    std::shared_ptr<sf::RenderWindow> m_Scene_window;
+    
     // Return true if it is last iteration
     // if true has been returned removing it from the vector
     std::vector<std::function<bool()>> animations;

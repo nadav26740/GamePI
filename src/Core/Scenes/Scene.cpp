@@ -15,17 +15,9 @@ void Scene::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     // Initialize or set up the scene with the given window
     // If you want to initialize other parts of the scene (e.g., objects), do so here
     // For example:
+    this->m_Scene_window = Scene_window;
     Objects_groups.clear();
 }
-
-// void Scene::Frame_update()
-// {
-//     std::cout << "Frame parent Update";
-// }
-
-// void Scene::Graphical_update()
-// {
-// }
 
 void Scene::Graphical_update(std::shared_ptr<sf::RenderWindow> Scene_window)
 {

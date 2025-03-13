@@ -56,6 +56,8 @@ private:
     ConfigLoader(ConfigLoader& other) = delete;
     void operator=(ConfigLoader& other) = delete;
 
+    
+
 protected:
     std::filesystem::path m_Theme_path;
     std::filesystem::path m_Default_assets_path;
@@ -66,6 +68,7 @@ protected:
     bool m_Config_Changed;
 
 public:
+    // Setting default parameters of the config
     void ResetToDefault();
 
     /// @brief Too allow singleton we used this function to create single static object of this class
