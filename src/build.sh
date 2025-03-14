@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e # stop on error
+start_time=$(date +%s)
 
 # files to compile
 CODE_FILES=(
@@ -118,7 +119,12 @@ else
     Output_path=${DEBUG_BIN_FOLDER}/$OUTFILE
 fi
 
+end_time=$(date +%s)
+echo "Compiling Time: $(($end_time-$start_time)) seconds"
+
+
 if [[ "$*" == *"run"* ]]
 then
     ./${Output_path}
 fi
+
