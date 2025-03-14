@@ -21,7 +21,7 @@ void MainMenu::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 
     // Add FPS counter
     m_fps_text.setFont(*(AssetsCacheManager::GetIntance()->GetFont()));
-    m_fps_text.setColor(sf::Color(0, 0, 0));
+    m_fps_text.setFillColor(sf::Color(0, 0, 0));
     
     
     this->m_drawables_objects.push_back(this->m_logo_sprite.get());

@@ -12,7 +12,7 @@ void GameShowCase::AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
         this->m_names_list_text.emplace_back();
         this->m_names_list_text[i].setFont(AssetsCacheManager::GetIntance()->GetFont_ref());
         this->m_names_list_text[i].setString(Game_name);
-        this->m_names_list_text[i].setColor(cm_text_color);
+        this->m_names_list_text[i].setFillColor(cm_text_color);
         this->m_names_list_text[i].setCharacterSize(cm_font_size);
         this->m_names_list_text[i].setPosition({LIST_GAP_FROM_LEFT, (GapBetweenNames * i) + LIST_GAP_FROM_TOP + (cm_font_size / 2)});
 

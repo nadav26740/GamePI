@@ -39,6 +39,9 @@ private:
     std::vector<sf::Text> m_names_list_text;
 
     // TODO: change current game shown 
+    
+    /// @brief adding game list to the screen
+    /// @param Scene_window The scene's render window
     void AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
 
 public:
