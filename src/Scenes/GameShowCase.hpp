@@ -4,45 +4,63 @@
 
 #include <iostream>
 #include <memory>
-#include "Core/Scenes/Scene.hpp"
 #include "libs/SFMLBoost.hpp"
+
+#include "Core/ConfigLoader.hpp"
+#include "Core/Scenes/Scene.hpp"
 #include "Core/Scenes/SceneManager.hpp"
 #include "Core/AssetsCacheManager.hpp"
 
 #define LIST_NAME_SIZE_ON_SCREEN 5
-#define LIST_GAP_FROM_LEFT 20
+#define LIST_GAP_FROM_LEFT 40
 #define LIST_GAP_FROM_TOP 40
 #define LIST_GAP_FROM_BOTTOM 40
-
 
 class GameShowCase : public Scene
 {
 private:
-    /* data */
-    std::shared_ptr<sf::Text> m_button_text; 
-    std::shared_ptr<sf::RectangleShape> m_button_background;
-    SFMLBoost::ObjectsGroup m_button_group;
+    struct LoadedGame
+    {
+        // Constructor
+        LoadedGame(std::string GameName,
+            std::filesystem::path CoverIMG,
+            std::filesystem::path GameFile);
 
+        /* data */
+        std::string GameName;
+        std::filesystem::path CoverIMG;
+        std::filesystem::path GameFile;
+    };
+
+    std::vector<LoadedGame> m_LoadedGames;
+
+    // Games Showcase
     sf::Sprite m_img_showcase;
     sf::Texture m_showcase_texture;
     std::shared_ptr<sf::Text> m_Game_name_text;
     std::string m_Game_name;
 
-    const float cm_cover_height = 400;
-    const float cm_cover_width = 400;
+    const float cm_cover_height = 300;
+    const float cm_cover_width = 300;
+    
+    //  Games List
     const sf::Color cm_Selected_color = sf::Color(234, 208, 92);
     const sf::Color cm_text_color = sf::Color(255, 255, 255);
-    
     const float cm_font_size = 32;
     const SFMLBoost::POSITION cm_list_Start_position = SFMLBoost::POSITION::TOP_LEFT;
     std::vector<std::string> m_Games_names;
     std::vector<sf::Text> m_names_list_text;
 
-    // TODO: change current game shown 
+    
     
     /// @brief adding game list to the screen
     /// @param Scene_window The scene's render window
     void AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
+    
+    /// @brief getting all the games in the config path
+    void LoadGamesListFromConfig();
+
+    static std::filesystem::path FindGameFile(const std::filesystem::path& dir_path, const std::string& extension);
 
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);

@@ -10,7 +10,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "Scene.hpp"
+#include "Core/Scenes/Scene.hpp"
+#include "Core/AssetsCacheManager.hpp"
 
 #include "libs/cpp-colors/colors.hpp"
 #include "libs/SFMLBoost.hpp"
