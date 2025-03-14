@@ -7,6 +7,7 @@ void ConfigLoader::ResetToDefault()
     this->m_Emulator_name = DEFAULT_EMULATOR_NAME;
     this->m_games_directory = DEFAULT_GAMES_DIRECTORY;
     this->m_Theme_path = DEFAULT_THEME_PATH;
+    this->m_Games_Extension = DEFAULT_GAMES_EXTENSION;
  
     this->m_Config_Changed = false;
 }
@@ -25,6 +26,7 @@ bool ConfigLoader::SaveConfig(const std::filesystem::path &config_path)
     js[KEY_EMULATOR_NAME] = m_Emulator_name;
     js[KEY_THEME_PATH] = m_Theme_path;    
     js[KEY_GAMES_DIRECTORY] = m_games_directory;
+    js[KEY_GAMES_EXTENSION] = m_Games_Extension;
 
     try
     {    
@@ -104,6 +106,7 @@ bool ConfigLoader::LoadConfig(const std::filesystem::path &config_path, bool Set
     this->JsonIntoField(js, m_Emulator_name, KEY_EMULATOR_NAME);
     this->JsonIntoField(js, m_Emulator_Flags, KEY_EMULATOR_FLAGS);
     this->JsonIntoField(js, m_Theme_path, KEY_THEME_PATH);
+    this->JsonIntoField(js, m_Games_Extension, KEY_GAMES_EXTENSION);
 
     // ! Changing ~ in paths to Home path
     m_Default_assets_path = std::regex_replace(m_Default_assets_path.string(), std::regex("~"), HOME_PATH + "/");
@@ -171,6 +174,10 @@ std::filesystem::path ConfigLoader::GetGamesDirectory()
     return this->m_games_directory;
 }
 
+std::string ConfigLoader::GetGamesExtension()
+{
+    return this->m_Games_Extension;
+}
 
 // * Setters
 
@@ -197,4 +204,9 @@ void ConfigLoader::SetEmulatorName(std::string value)
 void ConfigLoader::SetGamesDirectory(std::filesystem::path value)
 {
     this->m_games_directory = value;
+}
+
+void ConfigLoader::SetGamesExtension(std::string value)
+{
+    this->m_Games_Extension = value;
 }

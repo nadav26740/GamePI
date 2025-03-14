@@ -26,6 +26,7 @@
 #define DEFAULT_EMULATOR_NAME "mgba"
 #define DEFAULT_EMULATOR_FLAGS "-f"
 #define DEFAULT_GAMES_DIRECTORY HOME_PATH + "/" + DATA_DIRECTORY + "/EMULATOR_GAMES"
+#define DEFAULT_GAMES_EXTENSION ".gba"
 
 #define KEY_DEFAULT_ASSETS_PATH "Assets_Directory"
 #define KEY_THEME_PATH "Theme"
@@ -33,6 +34,7 @@
 #define KEY_EMULATOR_FLAGS "Emulator_Flags"
 #define KEY_GAMES_DIRECTORY "Games_Directory"
 #define KEY_CONFIG_VER "Config_version"
+#define KEY_GAMES_EXTENSION "Games_Extension"
 
 /// @brief class to make sure that assets won't be needed to load twice
 /// Will platform as Assets memory manager
@@ -40,7 +42,6 @@
 class ConfigLoader
 {
 private:
-
     /// @brief Getting json field referance and key and inserting the json in that key to the field 
     /// @tparam T int, string, char, bool
     /// @param js json to load from
@@ -56,14 +57,13 @@ private:
     ConfigLoader(ConfigLoader& other) = delete;
     void operator=(ConfigLoader& other) = delete;
 
-    
-
 protected:
     std::filesystem::path m_Theme_path;
     std::filesystem::path m_Default_assets_path;
     std::string m_Emulator_Flags;
     std::string m_Emulator_name;
     std::filesystem::path m_games_directory;
+    std::string m_Games_Extension;
 
     bool m_Config_Changed;
 
@@ -109,6 +109,10 @@ public:
     /// @return 
     std::filesystem::path GetGamesDirectory();
 
+    /// @brief 
+    /// @return 
+    std::string GetGamesExtension();
+
     // * Setters
 
     /// @brief 
@@ -130,6 +134,10 @@ public:
     /// @brief 
     /// @param value 
     void SetGamesDirectory(std::filesystem::path value);
+
+    /// @brief 
+    /// @param value 
+    void SetGamesExtension(std::string value);
 };
 
 #endif
