@@ -34,6 +34,34 @@ void GameShowCase::DecrementSelected()
 
 void GameShowCase::UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
+    // Check if no games 
+    if (m_LoadedGames.size() == 0)
+        return;
+    
+    std::string Game_name;
+
+    // Changing the background color
+    this->m_Background_Color = this->ColorRotation(this->m_SelectedGame_Index);    
+    
+    // Making sure that we won't get memory access violation bug 
+    std::size_t TempIndex = ((this->m_SelectedGame_Index - 2) + m_LoadedGames.size() * (LIST_NAME_SIZE_ON_SCREEN / 2));
+
+    // Adding the games into the graphical list
+    for (int i = 0; i < LIST_NAME_SIZE_ON_SCREEN; i++)
+    {
+        Game_name = this->m_LoadedGames[(TempIndex + i) % this->m_LoadedGames.size()].GameName;
+        this->m_names_list_text[i].setString(Game_name);
+//         std::cout << "[DEBUG (GameShowCase::UpdateGamesList)] " <<  i << ": " 
+//                 << this->m_names_list_text[i].getPosition().x << ", " << this->m_names_list_text[i].getPosition().y 
+//                 << " - " << Game_name << std::endl;
+//    #endif
+    }
+
+    m_SelectedGameChanged = false;
+}
+
+void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
+{
     float GapBetweenNames = (Scene_window->getSize().y - LIST_GAP_FROM_TOP - LIST_GAP_FROM_BOTTOM) / LIST_NAME_SIZE_ON_SCREEN; 
     std::string Game_name;
     const sf::Font& text_font = AssetsCacheManager::GetIntance()->GetFont_ref();
@@ -140,7 +168,7 @@ void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
     // TODO Add load all the games 
     LoadGamesListFromConfig();
-    UpdateGamesList(Scene_window);
+    CreateGamesList(Scene_window);
     this->m_Background_Color = this->ColorRotation(0);
 
     // * Setting the cover image

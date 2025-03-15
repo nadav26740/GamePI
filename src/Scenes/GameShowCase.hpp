@@ -72,9 +72,13 @@ private:
     // The timepoint where we allowed to take inptu
     std::chrono::steady_clock::time_point m_DelayInput;
     
-    /// @brief adding game list to the screen
+    /// @brief Update game list to the screen
     /// @param Scene_window The scene's render window
     void UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
+
+    /// @brief Create game list to the screen
+    /// @param Scene_window The scene's render window
+    void CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
     
     /// @brief getting all the games in the config path
     void LoadGamesListFromConfig();
