@@ -52,7 +52,11 @@ sf::RenderWindow* SceneManager::GetCurrentWindow()
 
 SceneManager::SceneManager()
 {
+    // Setting the window settings
     this->m_Active_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_RESOLUTION), "GamePI Window", sf::Style::Close);
+    this->m_Active_window->setKeyRepeatEnabled(false);
+    // this->m_Active_window->setFramerateLimit(FRAMES_LIMIT); // Do not use that i have my own frame limit!
+
     running = true;
 }
 

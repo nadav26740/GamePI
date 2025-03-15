@@ -1,15 +1,72 @@
 #include "GameShowCase.hpp"
 
-void GameShowCase::AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
+const sf::Color& GameShowCase::ColorRotation(std::size_t index)
+{
+    return cm_colors_rotation[index % cm_colors_rotation.size()];
+}
+
+void GameShowCase::IncrementSelected()
+{
+    // Chacking if any games exists
+    if(!this->m_LoadedGames.size())
+        return;
+
+    m_SelectedGame_Index++;
+    m_SelectedGame_Index %= m_LoadedGames.size();
+
+    // So The update game list will happpen
+    m_SelectedGameChanged = true;
+}
+
+void GameShowCase::DecrementSelected()
+{
+    // Chacking if any games exists
+    if(!this->m_LoadedGames.size())
+        return;
+
+    m_SelectedGame_Index--;
+    if(m_SelectedGame_Index < 0)
+        m_LoadedGames.size() - 1;
+    
+    // So The update game list will happpen
+    m_SelectedGameChanged = true;
+}
+
+void GameShowCase::UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
     float GapBetweenNames = (Scene_window->getSize().y - LIST_GAP_FROM_TOP - LIST_GAP_FROM_BOTTOM) / LIST_NAME_SIZE_ON_SCREEN; 
     std::string Game_name;
     const sf::Font& text_font = AssetsCacheManager::GetIntance()->GetFont_ref();
+    std::size_t middle_index_in_list = LIST_NAME_SIZE_ON_SCREEN / 2;
 
+    // Changing the background color
+    this->m_Background_Color = this->ColorRotation(this->m_SelectedGame_Index);
+    
+    
+    // Showing error if no games 
+    if (m_LoadedGames.size() == 0)
+    {
+        cpp_colors::colorful_print("[DEBUG ERROR (GameShowCase::UpdateGamesList)] No games found!", cpp_colors::foreground::bright_red, std::cerr);
+        
+        this->m_names_list_text.emplace_back();
+        this->m_names_list_text[0].setFont(text_font);
+        this->m_names_list_text[0].setString(std::string("No Games Found"));
+        this->m_names_list_text[0].setFillColor(cm_text_color);
+        this->m_names_list_text[0].setCharacterSize(cm_font_size);
+        this->m_names_list_text[0].setPosition({LIST_GAP_FROM_LEFT, (GapBetweenNames * middle_index_in_list) + LIST_GAP_FROM_TOP + (cm_font_size / 2)});
+        return;
+    }
+    
+    // Pre allocating memory for optimization
     this->m_names_list_text.reserve(LIST_NAME_SIZE_ON_SCREEN);
+    
+    // Making sure that we won't get memory access violation bug 
+    std::size_t TempIndex = ((this->m_SelectedGame_Index - 2) + m_LoadedGames.size() * (LIST_NAME_SIZE_ON_SCREEN / 2));
+
+    // Adding the games into the graphical list
     for (int i = 0; i < LIST_NAME_SIZE_ON_SCREEN; i++)
     {
-        Game_name = "Game " + std::to_string(i);
+        Game_name = this->m_LoadedGames[(TempIndex + i) % this->m_LoadedGames.size()].GameName;
         this->m_names_list_text.emplace_back();
         this->m_names_list_text[i].setFont(text_font);
         this->m_names_list_text[i].setString(Game_name);
@@ -17,17 +74,17 @@ void GameShowCase::AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window)
         this->m_names_list_text[i].setCharacterSize(cm_font_size);
         this->m_names_list_text[i].setPosition({LIST_GAP_FROM_LEFT, (GapBetweenNames * i) + LIST_GAP_FROM_TOP + (cm_font_size / 2)});
 
-// #ifdef DEBUG
-//         std::cout << "[DEBUG (GameShowCase::AddGamesList)] " <<  i << ": " 
+//         std::cout << "[DEBUG (GameShowCase::UpdateGamesList)] " <<  i << ": " 
 //                 << this->m_names_list_text[i].getPosition().x << ", " << this->m_names_list_text[i].getPosition().y 
 //                 << " - " << Game_name << std::endl;
-// #endif
+//    #endif
     }
 
-    this->m_names_list_text[LIST_NAME_SIZE_ON_SCREEN / 2].setStyle(sf::Text::Bold);
-    this->m_names_list_text[LIST_NAME_SIZE_ON_SCREEN / 2].setOutlineThickness(4);
-    this->m_names_list_text[LIST_NAME_SIZE_ON_SCREEN / 2].setOutlineColor(cm_Selected_color);
-    // TODO LOAD THE LOADED GAMES 
+    this->m_names_list_text[middle_index_in_list].setStyle(sf::Text::Bold);
+    this->m_names_list_text[middle_index_in_list].setOutlineThickness(4);
+    this->m_names_list_text[middle_index_in_list].setOutlineColor(cm_Selected_color);
+
+    m_SelectedGameChanged = false;
 }
 
 void GameShowCase::LoadGamesListFromConfig()
@@ -53,8 +110,9 @@ void GameShowCase::LoadGamesListFromConfig()
         #ifdef DEBUG
             std::cout << "[GameShowCase::LoadGamesListFromConfig] Loading Game Directory: " << dir_paths << std::endl;
         #endif
-            
-            this->FindGameFile(dir_paths, game_extension);
+            this->m_LoadedGames.emplace_back(LoadedGame(dir_paths.path().filename().string(), // Getting game name from folder name
+                                                        std::filesystem::path(), // Getting Img cover
+                                                        this->FindGameFile(dir_paths, game_extension))); // Finding the game file
         }
     }
 }
@@ -82,6 +140,8 @@ void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
     // TODO Add load all the games 
     LoadGamesListFromConfig();
+    UpdateGamesList(Scene_window);
+    this->m_Background_Color = this->ColorRotation(0);
 
     // * Setting the cover image
     this->m_showcase_texture = AssetsCacheManager::GetIntance()->GetTexture_ref("Cartridge");
@@ -94,16 +154,40 @@ void GameShowCase::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
     this->m_img_showcase.move({-40, 0});
 
     this->m_drawables_objects.push_back(&m_img_showcase);
-    
-    AddGamesList(Scene_window);
 }
 
 void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)
 {
+    // Adding movment in the game
+    // Using event to change only on press and not on hold
+    while (!events_queue.empty())
+    {
+        if (events_queue.back().type == sf::Event::KeyPressed)
+        {
+            switch (events_queue.back().key.code)
+            {
+            case sf::Keyboard::Up:
+                std::cout << "[GameShowCase::Frame_update] Changing selected game Up" << std::endl;
+                DecrementSelected();
+                break;
+
+            case sf::Keyboard::Down:
+                std::cout << "[GameShowCase::Frame_update] Changing selected game Down" << std::endl;
+                IncrementSelected();
+                break;
+            }
+        }
+        events_queue.pop();
+    }
 }
 
 void GameShowCase::Graphical_update(std::shared_ptr<sf::RenderWindow> Scene_window)
 {
+    if (m_SelectedGameChanged)
+    {
+        this->UpdateGamesList(Scene_window);
+    }
+
     Scene::Graphical_update(Scene_window);
 }
 

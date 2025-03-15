@@ -19,6 +19,16 @@
 class GameShowCase : public Scene
 {
 private:
+
+    /// Color Rotation:
+    const std::vector<sf::Color> cm_colors_rotation {sf::Color(4, 59, 92), sf::Color(227, 186, 143), sf::Color(205, 209, 228), sf::Color(65, 147, 169)};
+
+    /// @brief Getting index and return background color for that specific index
+    /// @param index current selected index
+    /// @return Color
+    const sf::Color& ColorRotation(std::size_t index);
+
+    // * Games
     struct LoadedGame
     {
         // Constructor
@@ -33,8 +43,16 @@ private:
     };
 
     std::vector<LoadedGame> m_LoadedGames;
+    std::size_t m_SelectedGame_Index = 0;
+    bool m_SelectedGameChanged = false;
+    
+    /// Changing selected game by one
+    void IncrementSelected();
+    
+    // Changing selected game
+    void DecrementSelected();
 
-    // Games Showcase
+    // * Games Showcase IMG
     sf::Sprite m_img_showcase;
     sf::Texture m_showcase_texture;
     std::shared_ptr<sf::Text> m_Game_name_text;
@@ -43,7 +61,7 @@ private:
     const float cm_cover_height = 300;
     const float cm_cover_width = 300;
     
-    //  Games List
+    // * Games List
     const sf::Color cm_Selected_color = sf::Color(234, 208, 92);
     const sf::Color cm_text_color = sf::Color(255, 255, 255);
     const float cm_font_size = 32;
@@ -51,11 +69,12 @@ private:
     std::vector<std::string> m_Games_names;
     std::vector<sf::Text> m_names_list_text;
 
-    
+    // The timepoint where we allowed to take inptu
+    std::chrono::steady_clock::time_point m_DelayInput;
     
     /// @brief adding game list to the screen
     /// @param Scene_window The scene's render window
-    void AddGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
+    void UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_window);
     
     /// @brief getting all the games in the config path
     void LoadGamesListFromConfig();
