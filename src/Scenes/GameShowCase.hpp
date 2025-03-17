@@ -82,6 +82,8 @@ private:
     /// @brief getting all the games in the config path
     void LoadGamesListFromConfig();
 
+    void RunGame();
+
     static std::filesystem::path FindGameFile(const std::filesystem::path& dir_path, const std::string& extension);
 
 public:
