@@ -78,7 +78,7 @@ void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
         
         this->m_names_list_text.emplace_back();
         this->m_names_list_text[0].setFont(text_font);
-        this->m_names_list_text[0].setString(std::string("No Games Found"));
+        this->m_names_list_text[0].setString(std::string("No Games Found."));
         this->m_names_list_text[0].setFillColor(cm_text_color);
         this->m_names_list_text[0].setCharacterSize(cm_font_size);
         this->m_names_list_text[0].setPosition({LIST_GAP_FROM_LEFT, (GapBetweenNames * middle_index_in_list) + LIST_GAP_FROM_TOP + (cm_font_size / 2)});
@@ -101,11 +101,6 @@ void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
         this->m_names_list_text[i].setFillColor(cm_text_color);
         this->m_names_list_text[i].setCharacterSize(cm_font_size);
         this->m_names_list_text[i].setPosition({LIST_GAP_FROM_LEFT, (GapBetweenNames * i) + LIST_GAP_FROM_TOP + (cm_font_size / 2)});
-
-//         std::cout << "[DEBUG (GameShowCase::UpdateGamesList)] " <<  i << ": " 
-//                 << this->m_names_list_text[i].getPosition().x << ", " << this->m_names_list_text[i].getPosition().y 
-//                 << " - " << Game_name << std::endl;
-//    #endif
     }
 
     this->m_names_list_text[middle_index_in_list].setStyle(sf::Text::Bold);
@@ -195,12 +190,12 @@ void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)
             switch (events_queue.back().key.code)
             {
             case sf::Keyboard::Up:
-                std::cout << "[GameShowCase::Frame_update] Changing selected game Up" << std::endl;
+                // std::cout << "[GameShowCase::Frame_update] Changing selected game Up" << std::endl;
                 DecrementSelected();
                 break;
 
             case sf::Keyboard::Down:
-                std::cout << "[GameShowCase::Frame_update] Changing selected game Down" << std::endl;
+                // std::cout << "[GameShowCase::Frame_update] Changing selected game Down" << std::endl;
                 IncrementSelected();
                 break;
             }
