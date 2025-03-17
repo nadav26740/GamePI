@@ -24,9 +24,10 @@ void GameShowCase::DecrementSelected()
     if(!this->m_LoadedGames.size())
         return;
 
-    m_SelectedGame_Index--;
-    if(m_SelectedGame_Index < 0)
-        m_LoadedGames.size() - 1;
+    if(m_SelectedGame_Index)
+        m_SelectedGame_Index--;
+    else
+        m_SelectedGame_Index = m_LoadedGames.size() - 1;
     
     // So The update game list will happpen
     m_SelectedGameChanged = true;
