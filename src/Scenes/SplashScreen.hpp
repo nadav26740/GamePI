@@ -7,6 +7,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 
 #include "SystemDefines.hpp"
@@ -20,6 +21,9 @@
 /// Fix undefined reference
 class SplashScreen : public Scene
 {
+private:
+    sf::Sound m_SoundPlayer;
+
 protected:
     /* data */
     SFMLBoost::ObjectsGroup m_Logo_group;

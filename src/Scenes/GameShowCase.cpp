@@ -154,16 +154,33 @@ void GameShowCase::RunGame()
     // Checking if any games loaded
     if (!this->m_LoadedGames.size())
     {
-        std::cerr << "[ERROR (GameShowCase::RunGame)] No games loaded!" << std::endl; 
-        // TODO: Play ERROR sound!
+        m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref());
+        m_SoundPlayer.setVolume(50);
+        m_SoundPlayer.play();
+
+        cpp_colors::colorful_print("[ERROR (GameShowCase::RunGame)] No games loaded!", cpp_colors::foreground::bright_red, std::cerr);
+        return;
+    }
+
+    // Checking if game file exists
+    if (this->m_LoadedGames[this->m_SelectedGame_Index].GameFile.empty())
+    {
+        m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref());
+        m_SoundPlayer.setVolume(50);
+        m_SoundPlayer.play();
+
+        cpp_colors::colorful_print("[ERROR (GameShowCase::RunGame)] " + this->m_LoadedGames[this->m_SelectedGame_Index].GameName + " Game file not found!", cpp_colors::foreground::bright_red, std::cerr);
         return;
     }
 
     std::string Run_Command = ConfigLoader::GetIntance()->GetEmulatorName() + " " + this->m_LoadedGames[this->m_SelectedGame_Index].GameFile.string() + " " +  ConfigLoader::GetIntance()->GetEmulatorFlags();
     std::cout << "[GameShowCase::RunGame] Run game command: " << Run_Command << std::endl; 
+    m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref("GameStart"));
+    m_SoundPlayer.play();
     // TODO: Add popen (process open)
 
     // TODO: move to monitor scene!
+
 }
 
 std::filesystem::path GameShowCase::FindGameFile(const std::filesystem::path& dir_path, const std::string& extension)
@@ -228,7 +245,8 @@ void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)
                 break;
 
             case sf::Keyboard::Enter:
-                std::cout << "Enter Pressed!" << std::endl;
+                // std::cout << "Enter Pressed!" << std::endl;
+                RunGame();
                 return;
                 break;
             }

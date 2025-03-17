@@ -71,6 +71,10 @@ void SplashScreen::Start(std::shared_ptr<sf::RenderWindow> Scene_window)
         this->m_black_rect->setFillColor(sf::Color(0u,0u,0u,(sf::Uint8)alpha));
         return false;
     });
+
+    // Playing Sound
+    this->m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref("Intro"));
+    this->m_SoundPlayer.play();
 }
 
 void SplashScreen::Frame_update(std::queue<sf::Event> events_queue)

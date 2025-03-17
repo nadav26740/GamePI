@@ -20,6 +20,7 @@ class GameShowCase : public Scene
 {
 private:
     sf::Sound m_swipe_sound;
+    sf::Sound m_SoundPlayer;
 
     /// Color Rotation:
     const std::vector<sf::Color> cm_colors_rotation {sf::Color(4, 59, 92), sf::Color(40, 67, 135), sf::Color(36, 37, 42), sf::Color(65, 147, 169)};
@@ -83,8 +84,13 @@ private:
     /// @brief getting all the games in the config path
     void LoadGamesListFromConfig();
 
+    /// @brief Running the game
     void RunGame();
 
+    /// @brief Searching for game file in the given folder
+    /// @param dir_path Folder to search in
+    /// @param extension The game file type
+    /// @return The game file path
     static std::filesystem::path FindGameFile(const std::filesystem::path& dir_path, const std::string& extension);
 
 public:
