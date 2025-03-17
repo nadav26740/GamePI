@@ -21,7 +21,7 @@ class GameShowCase : public Scene
 private:
 
     /// Color Rotation:
-    const std::vector<sf::Color> cm_colors_rotation {sf::Color(4, 59, 92), sf::Color(227, 186, 143), sf::Color(205, 209, 228), sf::Color(65, 147, 169)};
+    const std::vector<sf::Color> cm_colors_rotation {sf::Color(4, 59, 92), sf::Color(40, 67, 135), sf::Color(36, 37, 42), sf::Color(65, 147, 169)};
 
     /// @brief Getting index and return background color for that specific index
     /// @param index current selected index
@@ -62,10 +62,9 @@ private:
     const float cm_cover_width = 300;
     
     // * Games List
-    const sf::Color cm_Selected_color = sf::Color(234, 208, 92);
-    const sf::Color cm_text_color = sf::Color(255, 255, 255);
+    const sf::Color cm_Selected_color = sf::Color(108, 122, 137);
+    const sf::Color cm_text_color = sf::Color(247, 249, 247);
     const float cm_font_size = 32;
-    const SFMLBoost::POSITION cm_list_Start_position = SFMLBoost::POSITION::TOP_LEFT;
     std::vector<std::string> m_Games_names;
     std::vector<sf::Text> m_names_list_text;
 
