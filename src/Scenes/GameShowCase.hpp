@@ -19,6 +19,7 @@
 class GameShowCase : public Scene
 {
 private:
+    sf::Sound m_swipe_sound;
 
     /// Color Rotation:
     const std::vector<sf::Color> cm_colors_rotation {sf::Color(4, 59, 92), sf::Color(40, 67, 135), sf::Color(36, 37, 42), sf::Color(65, 147, 169)};
@@ -95,7 +96,7 @@ public:
 
     virtual void Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window);
     
-    
+    ~GameShowCase();
 };
 
 #endif

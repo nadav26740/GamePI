@@ -58,6 +58,9 @@ void GameShowCase::UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
 //    #endif
     }
 
+    // Playing Swipe Sound
+    this->m_swipe_sound.play();
+
     m_SelectedGameChanged = false;
 }
 
@@ -67,6 +70,10 @@ void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
     std::string Game_name;
     const sf::Font& text_font = AssetsCacheManager::GetIntance()->GetFont_ref();
     std::size_t middle_index_in_list = LIST_NAME_SIZE_ON_SCREEN / 2;
+
+    // Setting the swipe sound
+    this->m_swipe_sound.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref("Swipe"));
+    this->m_swipe_sound.setVolume(65);
 
     // Changing the background color
     this->m_Background_Color = this->ColorRotation(this->m_SelectedGame_Index);
@@ -222,6 +229,11 @@ void GameShowCase::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window
     {
         Scene_window->draw(itr);
     }
+}
+
+GameShowCase::~GameShowCase()
+{
+    this->m_swipe_sound.stop();
 }
 
 GameShowCase::LoadedGame::LoadedGame(std::string GameName, std::filesystem::path CoverIMG, std::filesystem::path GameFile)
