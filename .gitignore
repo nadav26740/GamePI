@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# VSCODE
+.vscode/
+.editorconfig
+
+# build
+bin/
+debug/
+release/
+
+# Identifier of wsl  
+.Identifier

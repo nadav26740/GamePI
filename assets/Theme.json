@@ -1,0 +1,52 @@
+{
+    "Metadata":
+    {
+        "Theme_name": "Default_Theme",
+        "Theme_Version": 0.1
+    },
+
+    "Textures": [
+        {
+            "name": "Error_texture",
+            "path": "Textures/Error.png"
+        },
+        {
+            "name": "GamePI_Icon",
+            "path": "Textures/GamePIicon.png"
+        },
+        {
+            "name": "Cartridge",
+            "path": "Textures/GameBoyCartridge.png"
+        }
+    ],
+
+    "Sounds": [
+        {
+            "name": "Swipe",
+            "path": "Sounds/swipe.ogg"
+        },
+        {
+            "name": "Error_Sound",
+            "path": "Sounds/error.ogg"
+        },
+        {
+            "name": "GameStart",
+            "path": "Sounds/openning.ogg"
+        },
+        {
+            "name": "Intro",
+            "path": "Sounds/intro.ogg"
+        }
+    ],
+
+    "Fonts": [
+        {
+            "name": "GameFont",
+            "path": "Fonts/GameFont.ttf"
+        },
+        {
+            "name": "Default_Font",
+            "path": "Fonts/GameFont.ttf"
+        }
+    ]
+}
