@@ -20,7 +20,20 @@
         }
     ],
 
-    "Sounds": [],
+    "Sounds": [
+        {
+            "name": "Swipe",
+            "path": "Sounds/swipe.ogg"
+        },
+        {
+            "name": "Error_Sound",
+            "path": "Sounds/error.ogg"
+        },
+        {
+            "name": "GameStart",
+            "path": "Sounds/openning.ogg"
+        }
+    ],
 
     "Fonts": [
         {
