@@ -173,14 +173,22 @@ void GameShowCase::RunGame()
         return;
     }
 
-    std::string Run_Command = ConfigLoader::GetIntance()->GetEmulatorName() + " " + this->m_LoadedGames[this->m_SelectedGame_Index].GameFile.string() + " " +  ConfigLoader::GetIntance()->GetEmulatorFlags();
+    std::string Run_Command = ConfigLoader::GetIntance()->GetEmulatorName() + " \"" + this->m_LoadedGames[this->m_SelectedGame_Index].GameFile.string() + "\" " +  ConfigLoader::GetIntance()->GetEmulatorFlags();
     std::cout << "[GameShowCase::RunGame] Run game command: " << Run_Command << std::endl; 
     m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref("GameStart"));
     m_SoundPlayer.play();
     // TODO: Add popen (process open)
 
-    // TODO: move to monitor scene!
-
+    // TODO: move to monitor scene! 
+    int emulator_return = system(Run_Command.c_str());
+    if (emulator_return)
+    {
+        m_SoundPlayer.stop();
+        m_SoundPlayer.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref());
+        m_SoundPlayer.setVolume(50);
+        m_SoundPlayer.play();
+        std::cerr << "[ERROR (GameShowCase::RunGame)] Emulator Returns: " << emulator_return << std::endl;
+    }
 }
 
 std::filesystem::path GameShowCase::FindGameFile(const std::filesystem::path& dir_path, const std::string& extension)
@@ -277,6 +285,8 @@ void GameShowCase::Render_objects(std::shared_ptr<sf::RenderWindow> Scene_window
 GameShowCase::~GameShowCase()
 {
     this->m_swipe_sound.stop();
+    this->m_swipe_sound.resetBuffer();
+    this->m_SoundPlayer.resetBuffer();
 }
 
 GameShowCase::LoadedGame::LoadedGame(std::string GameName, std::filesystem::path CoverIMG, std::filesystem::path GameFile)
