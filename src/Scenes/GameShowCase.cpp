@@ -57,6 +57,7 @@ void GameShowCase::UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
 //                 << " - " << Game_name << std::endl;
 //    #endif
     }
+    // TODO: Play Swipe Sound
 
     m_SelectedGameChanged = false;
 }
@@ -146,6 +147,23 @@ void GameShowCase::LoadGamesListFromConfig()
     }
 }
 
+void GameShowCase::RunGame()
+{
+    // Checking if any games loaded
+    if (!this->m_LoadedGames.size())
+    {
+        std::cerr << "[ERROR (GameShowCase::RunGame)] No games loaded!" << std::endl; 
+        // TODO: Play ERROR sound!
+        return;
+    }
+
+    std::string Run_Command = ConfigLoader::GetIntance()->GetEmulatorName() + " " + this->m_LoadedGames[this->m_SelectedGame_Index].GameFile.string() + " " +  ConfigLoader::GetIntance()->GetEmulatorFlags();
+    std::cout << "[GameShowCase::RunGame] Run game command: " << Run_Command << std::endl; 
+    // TODO: Add popen (process open)
+
+    // TODO: move to monitor scene!
+}
+
 std::filesystem::path GameShowCase::FindGameFile(const std::filesystem::path& dir_path, const std::string& extension)
 {
     for (const auto& file_path : std::filesystem::directory_iterator(dir_path))
@@ -198,11 +216,18 @@ void GameShowCase::Frame_update(std::queue<sf::Event> events_queue)
             case sf::Keyboard::Up:
                 std::cout << "[GameShowCase::Frame_update] Changing selected game Up" << std::endl;
                 DecrementSelected();
+                return;
                 break;
 
             case sf::Keyboard::Down:
                 std::cout << "[GameShowCase::Frame_update] Changing selected game Down" << std::endl;
                 IncrementSelected();
+                return;
+                break;
+
+            case sf::Keyboard::Enter:
+                std::cout << "Enter Pressed!" << std::endl;
+                return;
                 break;
             }
         }
