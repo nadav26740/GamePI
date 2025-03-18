@@ -42,9 +42,10 @@
 > **Must be declared**
 > * **events_queue** - queue contains the inputs between frames
 
-### virtual void Graphical_update();
+### virtual void Graphical_update(std::shared_ptr\<<sf::RenderWindow>\> Scene_window);
 > Runs every frame responsible for the graphical part of the frame <br/>
 > *Also runs the animations*
+> * **Scene_window** - Shared_ptr(from lib <memory>) of the main window for graphic placments
 
 ### virtual void Render_objects(std::shared_ptr\<<sf::RenderWindow>\> Scene_window);
 >  Runs every frame responsible to render the object into the screen <br/>
