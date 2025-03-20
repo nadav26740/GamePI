@@ -1,5 +1,5 @@
 # Scene Class Interface
-
+*Updated to v0.1*
 ## Protected Members
 
 ### std::vector\<<sf::Drawable*>\> m_drawables_objects
@@ -22,6 +22,7 @@
 > **The function must return bool that represent if the animation hasn't finished**
 >> **False** - Hasn't finished yet and will run again <br/>
 >> **True** - animation has finished and will be deleted from verctor  
+> [For More information](#Animations)
 
 
 ## Public Functions
@@ -46,8 +47,22 @@
 > Runs every frame responsible for the graphical part of the frame <br/>
 > *Also runs the animations*
 > * **Scene_window** - Shared_ptr(from lib <memory>) of the main window for graphic placments
-
 ### virtual void Render_objects(std::shared_ptr\<<sf::RenderWindow>\> Scene_window);
 >  Runs every frame responsible to render the object into the screen <br/>
 > **Attention - Also clearing the window** <br/>
 > * **Scene_window** - the main window for rendering
+
+## Animations
+*Updated to v0.1*<br/>
+```c++
+// Format!
+[]() -> bool { return true | false; }
+
+```
+
+To use animations u needed to add function to the function vector member named this->animations<br/>
+the member being managed by the function Graphical_Update<br/>
+the graphical update runs all the animations in the order they have inserted<br/>
+after each run the animation will return bool<br/>
+if the return value is true than the graphical_update will remove the animation from the animations<br/>
+ vector and by that it won't run again
