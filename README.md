@@ -33,3 +33,6 @@ TODO
 
 # 📝 License
 [Apache License](./License)
+
+# Concept Image
+![concept image](Docs/Concept_image.jpeg)
