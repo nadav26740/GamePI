@@ -16,6 +16,8 @@
 #define LIST_GAP_FROM_TOP 40
 #define LIST_GAP_FROM_BOTTOM 40
 
+#define GAME_COVER_IMG_NAME "cover.png"
+
 class GameShowCase : public Scene
 {
 private:
@@ -42,6 +44,8 @@ private:
         std::string GameName;
         std::filesystem::path CoverIMG;
         std::filesystem::path GameFile;
+
+        const std::string string();
     };
 
     std::vector<LoadedGame> m_LoadedGames;
@@ -92,6 +96,8 @@ private:
     /// @param extension The game file type
     /// @return The game file path
     static std::filesystem::path FindGameFile(const std::filesystem::path& dir_path, const std::string& extension);
+
+    static std::filesystem::path FindGameCover(const std::filesystem::path& dir_path);
 
 public:
     virtual void Start(std::shared_ptr<sf::RenderWindow> Scene_window);

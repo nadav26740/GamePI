@@ -143,10 +143,21 @@ void GameShowCase::LoadGamesListFromConfig()
             std::cout << "[GameShowCase::LoadGamesListFromConfig] Loading Game Directory: " << dir_paths << std::endl;
         #endif
             this->m_LoadedGames.emplace_back(LoadedGame(dir_paths.path().filename().string(), // Getting game name from folder name
-                                                        std::filesystem::path(), // Getting Img cover
-                                                        this->FindGameFile(dir_paths, game_extension))); // Finding the game file
+                                                        GameShowCase::FindGameCover(dir_paths), // Getting Img cover
+                                                        GameShowCase::FindGameFile(dir_paths, game_extension))); // Finding the game file
         }
     }
+
+#ifdef DEBUG
+
+    cpp_colors::colorful_print("[DEBUG (GameShowCase::LoadGamesListFromConfig)] ============ Loaded Games ============", cpp_colors::foreground::bright_blue);
+    for (auto game : m_LoadedGames)
+    {
+        std::cout << "[DEBUG (GameShowCase::LoadGamesListFromConfig)] " << game.string() << std::endl;
+    }
+    cpp_colors::colorful_print("[DEBUG (GameShowCase::LoadGamesListFromConfig)] ======================================", cpp_colors::foreground::bright_blue);
+
+#endif
 }
 
 void GameShowCase::RunGame()
@@ -207,6 +218,23 @@ std::filesystem::path GameShowCase::FindGameFile(const std::filesystem::path& di
     }
 
     cpp_colors::colorful_print("[ERROR (GameShowCase::FindGameFile)] Game File has been found: " + dir_path.string(), cpp_colors::foreground::bright_magenta, std::cerr);
+    return std::filesystem::path();
+}
+
+std::filesystem::path GameShowCase::FindGameCover(const std::filesystem::path &dir_path)
+{
+    for (const auto& file_path : std::filesystem::directory_iterator(dir_path))
+    {
+        if (!file_path.is_directory() && file_path.exists() &&
+                file_path.path().filename() == GAME_COVER_IMG_NAME) // checking the file name
+        {
+        #ifdef DEBUG
+            std::cout << "[GameShowCase::FindGameFile] Found game file: " << file_path << std::endl;
+        #endif
+
+            return file_path.path();
+        }
+    }
     return std::filesystem::path();
 }
 
@@ -294,4 +322,9 @@ GameShowCase::LoadedGame::LoadedGame(std::string GameName, std::filesystem::path
     this->CoverIMG = CoverIMG;
     this->GameFile = GameFile;
     this->GameName = GameName;
+}
+
+const std::string GameShowCase::LoadedGame::string()
+{
+    return this->GameName + ": " + (!this->GameFile.empty() ? this->GameFile.string() : "Missing") + " | Cover Img: " + (!this->CoverIMG.empty() ? this->CoverIMG.string() : "Missing") ;
 }
