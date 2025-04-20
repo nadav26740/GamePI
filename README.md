@@ -26,10 +26,8 @@ How to install on your raspberry PI<br/>
 `mkdir EMULATOR_GAMES` Here all the games will be saved
 
 # Requirements 
-Todo:
-
-# 🧻 Resources
-TODO
+SFML 2.6.2
+C++17
 
 # 📝 License
 [Apache License](./License)
