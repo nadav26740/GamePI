@@ -57,7 +57,17 @@ void GameShowCase::UpdateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
 //                 << " - " << Game_name << std::endl;
 //    #endif
     }
-    // TODO: Play Swipe Sound
+
+    // * checking if the middle game have an game in it 
+    // ! if no highlight in red 
+    if (this->m_LoadedGames[(TempIndex + m_middle_index_in_list) % this->m_LoadedGames.size()].GameFile.empty())
+    {
+        this->m_names_list_text[m_middle_index_in_list].setOutlineColor(cm_missing_game_highligh);
+    }
+    else
+    {
+        this->m_names_list_text[m_middle_index_in_list].setOutlineColor(cm_Selected_color);
+    }
 
     // Playing Swipe Sound
     this->m_swipe_sound.play();
@@ -70,7 +80,8 @@ void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
     float GapBetweenNames = (Scene_window->getSize().y - LIST_GAP_FROM_TOP - LIST_GAP_FROM_BOTTOM) / LIST_NAME_SIZE_ON_SCREEN; 
     std::string Game_name;
     const sf::Font& text_font = AssetsCacheManager::GetIntance()->GetFont_ref();
-    std::size_t middle_index_in_list = LIST_NAME_SIZE_ON_SCREEN / 2;
+    std::size_t& middle_index_in_list = this->m_middle_index_in_list;
+    middle_index_in_list = LIST_NAME_SIZE_ON_SCREEN / 2;
 
     // Setting the swipe sound
     this->m_swipe_sound.setBuffer(AssetsCacheManager::GetIntance()->GetSoundBuffer_ref("Swipe"));
@@ -114,7 +125,15 @@ void GameShowCase::CreateGamesList(std::shared_ptr<sf::RenderWindow> Scene_windo
 
     this->m_names_list_text[middle_index_in_list].setStyle(sf::Text::Bold);
     this->m_names_list_text[middle_index_in_list].setOutlineThickness(4);
-    this->m_names_list_text[middle_index_in_list].setOutlineColor(cm_Selected_color);
+
+    if (this->m_LoadedGames[(TempIndex + middle_index_in_list) % this->m_LoadedGames.size()].GameFile.empty())
+    {
+        this->m_names_list_text[middle_index_in_list].setOutlineColor(this->cm_missing_game_highligh);
+    }
+    else
+    {
+        this->m_names_list_text[middle_index_in_list].setOutlineColor(cm_Selected_color);
+    }
 
     m_SelectedGameChanged = false;
 }

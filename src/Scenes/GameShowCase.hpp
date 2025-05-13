@@ -70,9 +70,11 @@ private:
     // * Games List
     const sf::Color cm_Selected_color = sf::Color(108, 122, 137);
     const sf::Color cm_text_color = sf::Color(247, 249, 247);
+    const sf::Color cm_missing_game_highligh = sf::Color(175, 6, 6);
     const float cm_font_size = 32;
     std::vector<std::string> m_Games_names;
     std::vector<sf::Text> m_names_list_text;
+    std::size_t m_middle_index_in_list = 0;
 
     // The timepoint where we allowed to take inptu
     std::chrono::steady_clock::time_point m_DelayInput;
