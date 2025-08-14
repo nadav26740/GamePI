@@ -1,36 +1,63 @@
-# GamePI
-Game Boy Emulator for Raspberry Pi 4
-Todo: Description
+# 🎮 GamePI
 
-# ⬇️ Getting Started
-How to install on your raspberry PI<br/>
-### Clone the repository
-`git clone https://github.com/nadav26740/GamePI.git`
+Game Boy Emulator for Raspberry Pi 4 🕹️🍓
 
-### For automaticly installation -  Run the installation shell
-`cd ./GamePI`<br/>
-`./install.sh`<br/>
+---
 
-### To manualy install
-### Install all the requirements
-[Requirements](#Requirements)
+## 🚀 Getting Started
 
-### Compile the system using build.sh
-`cd ./GamePI/src`<br/>
-`./build.sh --release`<br/>
+How to install on your Raspberry Pi:
 
-### Make Required folders
-`cd`<br/>
-`mkdir .GAMEPI`<br/>
-`cd .GAMEPI`<br/>
-`mkdir EMULATOR_GAMES` Here all the games will be saved
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/nadav26740/GamePI.git
+```
 
-# Requirements 
-SFML 2.6.2
-C++17
+### 2️⃣ For automatic installation 🤖
+Run the installation shell:
+```bash
+cd ./GamePI
+./install.sh
+```
 
-# 📝 License
-[Apache License](./License)
+### 3️⃣ Manual Installation 🛠️
 
-# Concept Image
+#### Install all the requirements 📦
+See 👉 [Requirements](#requirements)
+
+#### Compile the system using build.sh ⚒️
+```bash
+cd ./GamePI/src
+./build.sh --release
+```
+
+#### Make required folders 📁
+```bash
+cd
+mkdir .GAMEPI
+cd .GAMEPI
+mkdir EMULATOR_GAMES   # Here all the games will be saved 🎲
+```
+
+---
+
+## 📋 Requirements
+
+- SFML 2.6.2 🖼️
+- C++17 💻
+
+---
+
+## 📝 License
+
+This project is licensed under the [Apache License](./License) 📄
+
+---
+
+## 🖼️ Concept Image
+
 ![concept image](Docs/Concept_image.jpeg)
+
+---
+
+Have fun playing Game Boy games on your Raspberry Pi! 🌟
