@@ -31,7 +31,11 @@ int main()
     try 
     {
         std::cout << "================== RUNNING DEMO MAIN LVL2 ==================" << std::endl;
-        AssetsCacheManager::GetIntance()->LoadTheme("../assets/");
+        if (!AssetsCacheManager::GetIntance()->LoadTheme("../assets/"))
+        {
+            AssetsCacheManager::GetIntance()->LoadTheme("assets/");
+        }
+
         std::cout << cpp_colors::foreground::bright_green << "[MAIN] Texture Loaded!" << cpp_colors::style::reset << std::endl;
     
         SceneManager::GetIntance()->SetCurrentScene(new SplashScreen());
