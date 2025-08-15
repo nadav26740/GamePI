@@ -83,3 +83,10 @@ release/
 
 # clang-tidy output
 /clang-tidy-fixes.patch
+
+_deps/
+out/
+*.cmake
+CMakeFiles/
+.vs/
+CMakeCache.txt
