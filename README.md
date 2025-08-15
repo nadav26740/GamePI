@@ -63,7 +63,7 @@ Explore the core architecture and modules:
 | 🎨 Themes                | Customizable visual styles for UI and components                            | [Docs/Core/themes.md](Docs/Core/themes.md) |
 | 🗂️ Architecture Diagrams | Visual workflow of asset management                                         | [Docs/Core/Assets_Cache_Manager_v1.drawio.svg](Docs/Core/Assets_Cache_Manager_v1.drawio.svg) |
 
-> For more details, see the [Docs/Core/README.md](Docs/Core/README.md).
+> For more details, see the [Docs/README.md](Docs/readme.md).
 
 ---
 
