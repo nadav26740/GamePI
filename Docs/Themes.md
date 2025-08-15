@@ -1,74 +1,87 @@
-## Theme config 
-At the root folder of each theme there should be a json file called Theme.json
-the file will contain the path and name of each asset in the theme, The file must be also conatin Theme_name and Theme_version
-> If two assets have the same path it will only load it once and both the names will point to the same loaded asset
+# 🎨 Theme Configuration
+
+Themes in GamePI enable flexible customization of the launcher’s look & feel. Each theme is defined in a `Theme.json` configuration file at the root of its folder.
+
+---
+
+## 🗄️ Theme.json Structure
+
+The `Theme.json` file must specify:
+- 📦 Paths and names of all assets used in the theme.
+- 🏷️ Theme metadata (name and version).
+
+**Tip:**  
+If multiple assets share the same path, the asset loads only once, with all names referencing the same instance.
+
+---
+
+### 🌈 Example: Theme.json
 
 ```json
 {
-    "Metadata":
-    {
+    "Metadata": {
         "Theme_name": "Default_Theme",
         "Theme_Version": 0.1
     },
-    
-    "Textures": 
-    [
-        {
-            "name": "Error_texture",
-            "path": "Textures/Error.png"
-        },
-        {
-            "name": "GamePI_Icon",
-            "path": "Textures/GamePIicon.png"
-        }
+    "Textures": [
+        { "name": "Error_texture", "path": "Textures/Error.png" },
+        { "name": "GamePI_Icon", "path": "Textures/GamePIicon.png" }
     ],
-
-    "Sounds":
-    [
-        {
-            "name": "Beep",
-            "path": "Sounds/Beep.mp3"
-        }
+    "Sounds": [
+        { "name": "Beep", "path": "Sounds/Beep.mp3" }
     ],
-
-    "Fonts":
-    [
-        {
-            "name": "GameFont",
-            "path": "Fonts/GameFont.ttf"
-        },
-        {
-            "name": "Default_Font",
-            "path": "Fonts/GameFont.ttf"
-        }
+    "Fonts": [
+        { "name": "GameFont", "path": "Fonts/GameFont.ttf" },
+        { "name": "Default_Font", "path": "Fonts/GameFont.ttf" }
     ]
 }
- ```
+```
 
-## Default Assets
-There are three default assets name defines that their purpose is that if the asset unable to be load it will load it instead
+---
 
-### The Default Defines name:
-* **Texture - "Error_texture"**
-* **Sound - "Error_Sound"**
-* **Font - "Default_Font"**
+## 🛡️ Default Assets
 
-## Struct of the config json file
-The Struct of the json config file must contain 4 things: <br/>
-* **Metadata** - Object that will contain the fields:
-    * Theme_name \<string\>
-    * Theme_Version \<Decimal Number\>
+GamePI defines fallback assets, loaded when a requested asset fails:
 
-* **Textures** - Array that will contain an objects of texture path and name:
-    * name \<string\>
-    * path \<string\>
+- 🖼️ **Texture:** `"Error_texture"`
+- 🔔 **Sound:** `"Error_Sound"`
+- 🅰️ **Font:** `"Default_Font"`
 
-* **Sounds** - Array that will contain an objects of sound path and name:
-    * name \<string\>
-    * path \<string\>
+---
 
-* **Fonts** - Array that will contain an objects of fonts path and name:
-    * name \<string\>
-    * path \<string\>
+## 🔖 Theme.json Required Structure
 
-> `The Paths must be related to the folder of the json config file` 
+The configuration file **must** contain:
+
+- **Metadata**  
+  - `Theme_name` *(string)*  
+  - `Theme_Version` *(decimal number)*
+
+- **Textures**  
+  Array of objects:  
+  - `name` *(string)*
+  - `path` *(string)*
+
+- **Sounds**  
+  Array of objects:  
+  - `name` *(string)*
+  - `path` *(string)*
+
+- **Fonts**  
+  Array of objects:  
+  - `name` *(string)*
+  - `path` *(string)*
+
+> 📌 **Asset paths must be relative to the Theme.json file location.**
+
+---
+
+## 🌟 Best Practices
+
+- Confirm all assets are included and referenced properly.
+- Use unique names for clarity.
+- Always provide fallback assets for a seamless experience.
+
+---
+
+> 📝 **See [AssetsCacheManager.md](Core/AssetsCacheManager.md) for asset caching details.**
