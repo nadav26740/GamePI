@@ -42,3 +42,44 @@ release/
 
 # Identifier of wsl  
 .Identifier
+
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+
+# IDE specific files (e.g., CLion, Visual Studio)
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.user
+*.suo
+
+# Executables and libraries
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.lib
+*.a
+
+# Test results and logs
+Testing/
+*.log
+
+CPackSourceConfig.cmake
+CPackConfig.cmake
+.vs/
+_deps/
