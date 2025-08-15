@@ -1,7 +1,9 @@
 <p align="center">
-  <h1>🎮 <b>GamePI</b></h1>
-  <i>Game Boy Emulator for Raspberry Pi 4</i><br>
-  🕹️🍓 <b>Fast, lightweight, and open-source!</b>
+  
+  <h1 align="center">🎮 <b>GamePI</b></h1>
+  <p align="center">
+  <b>Game Boy Emulator for Raspberry Pi 4</b> <br>
+  <i>🕹️🍓Fast, lightweight, and open-source!</i>
 </p>
 
 ---
@@ -42,7 +44,7 @@ mkdir EMULATOR_GAMES   # Place your ROMs here 🎲
 
 ## 📋 **Requirements**
 
-- **SFML 2.6.2** — Graphics, audio, and input
+- **SFML 2.5.2** — Graphics, audio, and input
 - **C++17** — Modern C++ features
 
 ---
