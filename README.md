@@ -1,4 +1,6 @@
 <p align="center">
+
+<img id="logo" src="./assets/Textures/GamePIicon.png" width="125">
   
   <h1 align="center">🎮 <b>GamePI</b></h1>
   <p align="center">
