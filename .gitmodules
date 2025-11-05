@@ -1,0 +1,6 @@
+[submodule "src/libs/single_include/nlohmann"]
+	path = src/libs/single_include/nlohmann
+	url = https://github.com/nlohmann/json.git
+[submodule "src/libs/nlhomann-json"]
+	path = src/libs/nlhomann-json
+	url = https://github.com/nlohmann/json.git
